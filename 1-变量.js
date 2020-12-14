@@ -52,7 +52,11 @@
     }
     // console.log(name2) 报错,let声明的是块级作用域,全局环境下无法访问
 
-    // 与var不同,let在全局作用域下声明的变量不会成为window得属性,而var则会
-    var name3 = ''
+    // 与var不同,let在全局作用域下声明的变量不会成为window得属性,而var则会, node中不存在window对象
+    var name3 = '马六'
+    // console.log(window.name3) 
+
+    let name4 = '找七'
+    // console.log(window.name4)
 })()
 
