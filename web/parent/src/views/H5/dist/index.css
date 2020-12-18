@@ -1,0 +1,36 @@
+.yuyihua header {
+  position: relative;
+  height: 50px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.yuyihua header nav {
+  position: absolute;
+  width: 60%;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid #ccc;
+}
+.yuyihua main {
+  float: left;
+  width: 80%;
+  height: 80px;
+  border: 1px solid #ccc;
+}
+.yuyihua aside {
+  float: left;
+  width: 20%;
+  height: 80px;
+  border: 1px solid #ccc;
+}
+.yuyihua aside::after {
+  clear: both;
+}
+.yuyihua footer {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+.h5-container .h5-list {
+  display: flex;
+}

@@ -31,3 +31,37 @@ module.exports = {
 
 安装
 新建public/index.html
+
+给css添加前缀
+```
+并在loader中加入
+rules:[
+    {test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader']}
+]
+...
+plugins: [
+    ...
+    require('autoprefixer')
+]
+
+在package.json中加入
+...
+"browserslist": [
+    "Firefox > 20",
+    "iOS >= 7",
+    "ie >= 8",
+    "last 5 versions",
+    "> 5%"
+] //为了确认浏览器版本
+```
+简写引入路径
+```
+resolve: {
+    alias: {
+        '@': path.resolve(__dirname, '../src/...),
+        ...
+    },
+    extensions: ['*', '.js', '.vue', '.json'], 后缀名
+}
+
+区分开发环境与生产环境

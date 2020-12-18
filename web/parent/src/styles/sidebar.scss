@@ -1,0 +1,153 @@
+#root {
+    width: 100%;
+    height: 100%;
+
+    .app-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f5f5f5;
+        .app-main {
+            padding: 10px;
+            overflow: hidden;
+        }
+        &.pc-app {
+            &.hideSidebar {
+                .sidebar {
+                    width: 80px;
+                }
+
+                .main-container {
+                    margin-left: 80px;
+                }
+            }
+            .main-container {
+                margin-left: $sideBarWidth;
+                transition: margin-left 0.28s ease;
+
+                .app-main {
+                    min-height: calc(100vh - 50px);
+                    width: 100%;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .navheader {
+                    position: relative;
+                }
+            }
+
+            .sidebar {
+                width: $sideBarWidth;
+                transition: width 0.28s ease;
+            }
+        }
+
+        &.mobile-app {
+            .main-container {
+                margin: 0;
+                .app-main {
+                    min-height: 100vh;
+                    width: 100%;
+                    padding-top: 60px;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .navheader {
+                    position: fixed;
+                    z-index: 9;
+                    transition: width 0.28s;
+                }
+            }
+
+            .drawer-bg {
+                background: #000;
+                opacity: 0.3;
+                width: 100%;
+                top: 0;
+                height: 100%;
+                position: absolute;
+                z-index: 999;
+            }
+            .sidebar {
+                transition: transform .28s;
+                width: $sideBarWidth;
+            }
+            &.hideSidebar {
+                .sidebar {
+                    transform: translateX(-$sideBarWidth);
+                }
+            }
+           
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+            height: 100%;
+        }
+
+        .navheader {
+            @include fj;
+            height: 50px;
+            width: 100%;
+            top: 0;
+            right: 0;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+            .navheader-left {
+                flex: 1;
+                clear: both;
+                .navIcon {
+                    float: left;
+                    padding: 0 15px;
+                    line-height: 50px;
+                }
+                .navlink {
+                    float: left;
+                    height: 50px;
+                    div {
+                        line-height: 50px;
+                    }
+                }
+            }
+            .navheader-right {
+                flex: 1;
+                clear: both;
+                padding: 0 15px;
+                .avatar {
+                    float: right;
+                    width: 50px;
+                    height: 50px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        padding: 10px;
+                    }
+                }
+                .user-menu {
+                    float: right;
+                    height: 50px;
+                    line-height: 50px;
+                }
+            }
+        }
+        
+    }
+    // pc和mobile切换时不显示过渡动画
+    .withoutAnimation {
+        .main-container,
+        .sidebar {
+            transition: none;
+        }
+    }
+
+}
+
+.ant-menu-root.ant-menu-vertical,.ant-menu-inline {
+    height: 100%;
+}

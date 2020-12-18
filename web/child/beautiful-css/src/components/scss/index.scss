@@ -1,0 +1,38 @@
+$highlight-color: #f90;
+// 混合
+@mixin wh {
+    width: 100px;
+    height:100px;
+}
+
+// 混合传参
+@mixin border($width, $style, $color) {
+    border: $width $style $color;
+}
+
+// 混合传参
+@mixin font($size, $color: red,) {
+    font-size: $size;
+    color: $color;
+}
+// 继承
+.extend {
+    border: 1px solid yellow;
+    background-color: #fdd;
+}
+
+.scss-container {
+    display: flex;
+    justify-content: center;
+    .scss-btn {
+        @include wh;
+        @include border(1px, solid, red);
+        @include font(18px);
+        @include font(18px, blue);
+        @extend .extend;
+        background-color: $highlight-color;
+        &:hover {
+            background-color: greenyellow;
+        }
+    }
+}
