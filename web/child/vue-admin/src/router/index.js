@@ -4,27 +4,25 @@ import Home from '../views/index.vue'
 
 Vue.use(VueRouter)
 
-export const routes = [
+// 不需要经过鉴权的路由
+export const constantRoutes = [
     {
-        path: '/',
-        name: 'Home',
-        meta: {
-            category: 'layout'
-        },
-        component: Home
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login/index')
     },
     {
-        path: '/about',
+        path: '/',
+        component: Home,
         name: 'About',
         meta: {
             category: 'component'
         },
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
 ]
 
 const router = new VueRouter({
-    routes
+    routes: constantRoutes
 })
 
 export default router

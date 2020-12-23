@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { routes } from "../router/index";
+import { constantRoutes } from "../router/index";
 export default {
   data() {
     return {};
@@ -24,7 +24,7 @@ export default {
 
   computed: {
     componentslist: function() {
-      return routes.filter(item => {
+      return constantRoutes.filter(item => {
         return item.meta && item.meta.category === "component";
       }).map((item) => {
           item.color = this.randomColor()
