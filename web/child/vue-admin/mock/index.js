@@ -41,6 +41,7 @@ function mockXHR() {
   
     function XHR2ExpressReqWrap(respond) {
       return function(options) {
+        console.log(options)
         let result = null
         if (respond instanceof Function) {
           const { body, type, url } = options

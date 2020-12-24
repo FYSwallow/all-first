@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/index.vue'
+import Layout from '../layout/index.vue'
 
 Vue.use(VueRouter)
 
@@ -13,11 +13,7 @@ export const constantRoutes = [
     },
     {
         path: '/',
-        component: Home,
-        name: 'About',
-        meta: {
-            category: 'component'
-        },
+        component: Layout,
     }
 ]
 

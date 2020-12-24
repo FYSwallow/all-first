@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="style">
+  <div id="app">
     <router-view />
     <!-- <div class="snow-container">
       <div class="snow" v-for="item in 20" :key="item"></div>
@@ -8,22 +8,7 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    randomColor: function() {
-      var r = Math.floor(Math.random() * 256);
-      var g = Math.floor(Math.random() * 256);
-      var b = Math.floor(Math.random() * 256);
-      return "rgb(" + r + "," + g + "," + b + ")";
-    }
-  },
-  computed: {
-    style: function() {
-      let background = `radial-gradient(ellipse at bottom, ${this.randomColor()} 0%, rgb(100, 100, 100) 100%)`;
-      return { background };
-    }
-  }
-};
+export default {};
 </script>
 <style lang='scss' scope>
 #app {

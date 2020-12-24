@@ -14,6 +14,9 @@ service.interceptors.request.use(
             config.headers['X-Token'] = getToken()
         }
         return config
+    },
+    error => {
+        return Promise.reject(error)
     }
 )
 service.interceptors.response.use(
