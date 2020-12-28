@@ -6,21 +6,34 @@
             @click="toggleSideBar"
         ></div>
         <div class="navbar-right">
-
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                    {{username}}<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown" @click="logout">
+                    <el-dropdown-item>退出</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
         </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
     components: {},
     computed: {
-        ...mapGetters(['sidebar'])
+        ...mapGetters(['sidebar', 'username']),
+        ...mapState({
+            username: state => state.user.name
+        })
     },
     methods: {
         toggleSideBar: function() {
             this.$store.dispatch('app/toggleSidebar')
+        },
+        logout: async function() {
+            this.$store.dispatch('user/logout')
         }
     }
 }
