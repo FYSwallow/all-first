@@ -21,7 +21,7 @@ export const constantRoutes = [
                 path: 'dashboard',
                 name: 'dashboard',
                 component: () => import('@/views/dashboard/index'),
-                meta: {title: 'Dashboard'}
+                meta: {title: 'Dashboard', icon: 'el-icon-s-data'}
             }
         ]
     },
@@ -33,8 +33,8 @@ export const constantRoutes = [
             {
                 path: 'index',
                 name: 'IM聊天',
-                component: () => import('@/views/dashboard/index'),
-                meta: {title: 'IM聊天'}
+                component: () => import('@/views/im/index'),
+                meta: {title: 'IM聊天', icon: 'el-icon-s-comment'}
             }
         ]
     },
@@ -42,14 +42,21 @@ export const constantRoutes = [
         path: '/h5drag',
         component: Layout,
         redirect: '/h5drag/index',
+        meta: {title: 'H5', icon: 'el-icon-rank'},
         children: [
             {
                 path: 'index',
                 name: 'H5',
                 component: () => import('@/views/dashboard/index'),
                 meta: {title: 'H5拖拽'}
+            },
+            {
+                path: 'list',
+                name: 'H5list',
+                component: () => import('@/views/dashboard/index'),
+                meta: {title: 'H5列表'}
 
-            }
+            },
         ]
     }
 ]

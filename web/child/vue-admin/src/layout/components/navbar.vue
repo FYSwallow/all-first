@@ -6,12 +6,12 @@
             @click="toggleSideBar"
         ></div>
         <div class="navbar-right">
-            <el-dropdown>
+            <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                    {{username}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    {{ username}}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
-                <el-dropdown-menu slot="dropdown" @click="logout">
-                    <el-dropdown-item>退出</el-dropdown-item>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -32,8 +32,13 @@ export default {
         toggleSideBar: function() {
             this.$store.dispatch('app/toggleSidebar')
         },
+        handleCommand(command) {
+            this[command]()
+        },
         logout: async function() {
-            this.$store.dispatch('user/logout')
+            await this.$store.dispatch('user/logout')
+            console.log(this.$router, this.$route)
+            this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         }
     }
 }

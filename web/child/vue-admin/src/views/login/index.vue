@@ -93,9 +93,15 @@ export default {
         }
     },
     watch: {
-        $route: function(route) {
-            const query = route.query
-            console.log(query)
+        $route: {
+            handler: function(route) {
+                const query = route.query
+                if (query) {
+                    this.redirect = query.redirect
+                    console.log(this.redirect)
+                }
+            },
+            immediate: true
         }
     },
     methods: {

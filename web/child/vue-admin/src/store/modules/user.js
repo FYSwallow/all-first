@@ -59,7 +59,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             logout(state.token).then(() => {
                 commit('SET_TOKEN', '')
-                commit('SET_ROlES', [])
+                commit('SET_ROLES', [])
                 removeToken()
                 resolve()
             }).catch((error) => {

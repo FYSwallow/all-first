@@ -10,6 +10,9 @@
                 <router-view></router-view>
             </div>
         </div>
+        <right-panel v-if="showSetting">
+            <settings/>
+        </right-panel>
     </div>
 </template>
 
@@ -17,16 +20,21 @@
 import { mapState } from 'vuex'
 import sideBar from './components/sidebar/index'
 import navBar from './components/navbar'
+import rightPanel from './components/rightPanel/index'
+import settings from './components/settings/index'
 import mixin from './mixin/resizeHandler'
 export default {
     data() {
         return {
-            fixedHeader: true
+            fixedHeader: true,
+            showSetting: true
         }
     },
     components: {
         sideBar,
-        navBar
+        navBar,
+        rightPanel,
+        settings
     },
     mixins: [mixin],
     computed: {
@@ -67,6 +75,7 @@ export default {
         background-color: $menuBg;
         transition: all ease 0.28s;
         z-index: 1000;
+        border-right: 1px solid #ccc;
     }
     .main-container {
         min-height: 100%;

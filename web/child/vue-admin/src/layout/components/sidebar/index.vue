@@ -7,16 +7,12 @@
                 :collapse-transition="false"
                 :background-color="variables.menuBg"
             >
-                <sidebar-Item v-for="item in permission_routes" :key="item.path" :item="item"></sidebar-Item>
-                <el-submenu index="1">
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span slot="title">Navigator One</span>
-                    </template>
-                    <el-menu-item-group>
-                        <el-menu-item index="1-1">item one</el-menu-item>
-                    </el-menu-item-group>
-                </el-submenu>
+                <sidebar-Item
+                    v-for="item in permission_routes"
+                    :key="item.path"
+                    :item="item"
+                    :basePath="item.path"
+                ></sidebar-Item>
             </el-menu>
         </el-scrollbar>
     </div>
@@ -28,7 +24,7 @@ import SidebarItem from './sidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
-    components: {SidebarItem},
+    components: { SidebarItem },
     data() {
         return {
             variables
@@ -40,7 +36,7 @@ export default {
             return !this.sidebar.opened
         },
         activeMenu: function() {
-            const {path} = this.$route
+            const { path } = this.$route
             return path
         }
     },
@@ -48,9 +44,25 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import '@/styles/variables.scss';
 .el-menu {
-    border: none;
+    border: none !important;
+}
+.el-menu--collapse {
+    .el-submenu {
+        & > .el-submenu__title {
+            & > span {
+                height: 0;
+                width: 0;
+                overflow: hidden;
+                visibility: hidden;
+                display: inline-block;
+            }
+            & > .el-submenu__icon-arrow {
+                display: none;
+            }
+        }
+    }
 }
 </style>
