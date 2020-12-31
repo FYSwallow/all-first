@@ -1,7 +1,7 @@
 <!--  -->
 <template>
-  <div>
-      dashboard
+  <div class="dashboard-container">
+        div.
   </div>
 </template>
 

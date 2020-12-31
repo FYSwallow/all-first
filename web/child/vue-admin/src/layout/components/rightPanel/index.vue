@@ -56,7 +56,7 @@ export default {
             height: 50px;
             line-height: 50px;
             text-align: center;
-            background: chartreuse;
+            background: #409EFF;
             border-radius: 6px 0 0 6px;
             font-size: 24px;
             color: #fff;
