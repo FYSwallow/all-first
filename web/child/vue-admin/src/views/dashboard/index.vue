@@ -1,24 +1,226 @@
 <!--  -->
 <template>
-  <div class="dashboard-container">
-        div.
-  </div>
+    <div class="dashboard-container">
+        <header class="dashboard-header clearfix">
+            <div class="header-left fl">{{date}}</div>
+            <div class="header-center fl">物流大数据展示</div>
+            <div class="header-right fl"></div>
+            <div class="header-bottom fl"></div>
+        </header>
+        <main class="dashboard-content clearfix">
+            <div class="content-left fl">
+                <base-info class="dashboard-border" :baseInfo="baseInfo" />
+                <package-rank class="dashboard-border" :packageRank="packageRank" />
+                <pie-chart1 class="dashboard-border"></pie-chart1>
+            </div>
+            <div class="content-center fl">
+                <map-chart1 class="dashboard-border"></map-chart1>
+                <bar-chart1 class="dashboard-border"></bar-chart1>
+            </div>
+            <div class="content-right fl">
+                <pie-chart2 class="dashboard-border"></pie-chart2>
+                <bar-chart2 class="dashboard-border"></bar-chart2>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script>
+import { parseTime } from '@/utils/index.js'
+import { getBaseInfo, getpackageRank } from '@/api/dashboard'
+import BaseInfo from './components/baseInfo/index.vue'
+import PackageRank from './components/packageRank/index.vue'
+import PieChart1 from './components/pie/pieChart.vue'
+import PieChart2 from './components/pie/pieChart2.vue'
+import Barchart1 from './components/bar/barChart.vue'
+import Barchart2 from './components/bar/barChart2.vue'
+import Mapchart1 from './components/map/mapChart1.vue'
 export default {
-  data () {
-    return {
-    };
-  },
+    data() {
+        return {
+            date: parseTime(),
+            baseInfo: {},
+            packageRank: []
+        }
+    },
+    mounted() {
+        this.timer = setInterval(() => {
+            this.date = parseTime()
+        })
+        this.getBaseInfo()
+        this.getpackageRank()
+    },
+    beforeDestroy() {
+        if (this.timer) {
+            clearInterval(this.timer)
+        }
+    },
+    components: {
+        PackageRank,
+        BaseInfo,
+        pieChart1: PieChart1,
+        pieChart2: PieChart2,
+        barChart1: Barchart1,
+        barChart2: Barchart2,
+        mapChart1: Mapchart1
+    },
 
-  components: {},
+    computed: {
+        // baseInfo: function() {
+        //     return this.getBaseInfo()
+        // }
+    },
 
-  computed: {},
+    methods: {
+        getBaseInfo() {
+            getBaseInfo().then(res => {
+                this.baseInfo = this.filterNum(res.data)
+            })
+        },
+        getpackageRank() {
+            getpackageRank().then(res => {
+                let data = res.data
+                let paramList = []
+                data.forEach(item => {
+                    let val = item.packageNum.toString()
+                    if (val.length > 4) {
+                        paramList.push({...item, packageNum: val.slice(0, val.length - 4) + '万'}) 
+                        console.log(paramList)
 
-  methods: {}
+                    } else {
+                        paramList.push(item)
+                    }
+                })
+            
+                this.packageRank = paramList
+            })
+        },
+        filterNum(data) {
+            let paramObj = {}
+            for (const key in data) {
+                let item = data[key].toString()
+                paramObj[key] = item
+                if (item.length > 4) {
+                    paramObj[key] = item.slice(0, item.length - 4) + '万'
+                }
+            }
+            return paramObj
+        }
+    }
 }
-
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
+.dashboard-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: #101129 0 0 / cover no-repeat;
+    color: #fff;
+    .dashboard-header {
+        clear: both;
+        height: 100px;
+        color: #fff;
+        text-align: center;
+        .header-left {
+            width: 25%;
+            height: 80px;
+            line-height: 80px;
+            font-size: 12px;
+        }
+        .header-center {
+            width: 50%;
+            height: 80px;
+            line-height: 80px;
+            position: relative;
+            font-size: 24px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 30px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('./styles/images/head.gif') 0 no-repeat;
+                background-size: cover;
+            }
+        }
+        .header-right {
+            width: 25%;
+            height: 80px;
+            line-height: 80px;
+        }
+        .header-bottom {
+            height: 20px;
+            width: 100%;
+            background: url('./styles/images/header.png') 0 no-repeat;
+            background-size: contain;
+        }
+    }
+    .dashboard-content {
+        height: calc(100% - 100px);
+        width: 100%;
+        padding: 10px 5px;
+        .content-left {
+            width: 25%;
+            height: 100%;
+            padding: 5px;
+        }
+        .content-center {
+            width: 50%;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            .dashboard-border {
+                flex: 1;
+            }
+        }
+        .content-right {
+            width: 25%;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            .dashboard-border {
+                flex: 1;
+            }
+        }
+    }
+    .dashboard-border {
+        position: relative;
+        border: 1px solid #0bc4e9;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            top: -1px;
+            left: 10%;
+            width: 80%;
+            border-top: 1px solid #007297;
+            border-bottom: 1px solid #007297;
+            transition: all 1s;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            left: -1px;
+            right: -1px;
+            top: 10%;
+            height: 80%;
+            border-left: 1px solid #007297;
+            border-right: 1px solid #007297;
+            transition: all 1s;
+        }
+        &:hover::before {
+            width: 0%;
+        }
+        &:hover::after {
+            height: 0%;
+        }
+    }
+}
 </style>

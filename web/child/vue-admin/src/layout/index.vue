@@ -11,7 +11,7 @@
             </div>
         </div>
         <right-panel v-if="showSetting">
-            <settings/>
+            <settings />
         </right-panel>
     </div>
 </template>
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '@/styles/variables.scss';
 .app-warpper {
     position: relative;
@@ -79,6 +79,7 @@ export default {
     }
     .main-container {
         min-height: 100%;
+        height: 100%;
         transition: margin-left ease 0.28s;
         margin-left: $sideBarWidth;
         position: relative;
@@ -91,6 +92,10 @@ export default {
         }
         .mobile .fixed-header {
             width: 100%;
+        }
+        .app-main {
+            height: 100%;
+            overflow: auto;
         }
         .fixed-header + .app-main {
             padding-top: 50px;

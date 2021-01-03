@@ -1,9 +1,11 @@
 const Mock = require('mockjs')
 
 const user = require('./user')
+const dashboard = require('./dashboard')
 
 const mocks = [
     ...user,
+    ...dashboard,
 ]
 
 function param2Obj(url) {
