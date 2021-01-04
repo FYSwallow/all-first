@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .packageRank-container {
+    font-size: 12px;
     height: 25%;
     .content-title {
         padding-left: 5px;

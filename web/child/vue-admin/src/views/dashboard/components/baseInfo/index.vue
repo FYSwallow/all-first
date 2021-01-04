@@ -17,8 +17,8 @@
 export default {
     props: {
         baseInfo: {
-            type: Object,
-            default: {}
+            // type: Object,
+            // default: {}
         }
     },
     
@@ -28,7 +28,7 @@ export default {
 <style lang="scss" scoped>
 .baseInfo-container {
     font-size: 12px;
-    height: 25%;
+    height: 20%;
     .content-list {
         margin-top: 20px;
         .content-item {

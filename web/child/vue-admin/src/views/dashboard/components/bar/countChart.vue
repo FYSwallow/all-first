@@ -1,11 +1,13 @@
 <template>
-    <div class="barchart-container">
-        <div class="barchart-canvas" ref="barchart1"></div>
+    <div class="countChart-container">
+        <div class="content-title">月统计</div>
+        <div class="countChart-canvas" ref="countChart"></div>
     </div>
 </template>
 
 <script>
 import * as echarts from 'echarts'
+import mixin from '../mixin'
 export default {
     data() {
         let colors = [
@@ -227,23 +229,32 @@ export default {
                         ]
                     }
                 ]
-            }
+            },
+            myChart: {}
         }
     },
+    mixins: [mixin],
     mounted() {
-        this.drawerCanvas()
+        this.drawCanvas()
     },
     methods: {
-        drawerCanvas: function() {
-            let barchart = echarts.init(this.$refs.barchart1)
-            barchart.setOption(this.option)
+        drawCanvas: function() {
+            this.myChart = echarts.init(this.$refs.countChart)
+            this.myChart.setOption(this.option)
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.barchart-canvas {
-    height: 300px;
+.countChart-container {
+    font-size: 12px;
+    .content-title {
+        padding-left: 5px;
+        border-left: 3px solid #0bc4e9;
+    }
+    .countChart-canvas {
+        height: 300px;
+    }
 }
 </style>

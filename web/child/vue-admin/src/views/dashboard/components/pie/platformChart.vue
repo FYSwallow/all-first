@@ -1,48 +1,19 @@
 <template>
-    <div class="piechart-container">
-        <div class="piechart-canvas" ref="piechart2"></div>
+    <div class="platformChart-container">
+        <div class="content-title">各平台占比</div>
+        <div class="platformChart-canvas" ref="platformChart"></div>
     </div>
 </template>
 
 <script>
 import * as echarts from 'echarts'
+import mixin from '../mixin'
 export default {
+    props: {
+        platformData: {}
+    },
     data() {
-        let ydata = [
-                {
-                    name: '天猫',
-                    value: 18
-                },
-                {
-                    name: '京东',
-                    value: 16
-                },
-                {
-                    name: '苏宁易购',
-                    value: 15
-                },
-                {
-                    name: '拼多多',
-                    value: 14
-                },
-                {
-                    name: '国美',
-                    value: 10
-                },
-                {
-                    name: '亚马逊',
-                    value: 7.9
-                },
-                {
-                    name: '唯品会',
-                    value: 6.7
-                },
-                {
-                    name: '其他',
-                    value: 6
-                }
-            ],
-            color = [
+        let color = [
                 '#8d7fec',
                 '#5085f2',
                 '#e75fc3',
@@ -138,26 +109,38 @@ export default {
                                 }
                             }
                         },
-                        data: ydata
+                        data: []
                     }
                 ]
-            }
+            },
+            myChart: {}
         }
     },
-    mounted() {
-        this.drawerCanvas()
+    mixins: [mixin],
+    watch: {
+        platformData: function() {
+            this.option.series[0].data = this.platformData
+            this.drawCanvas()
+        }
     },
     methods: {
-        drawerCanvas: function() {
-            let pieChart = echarts.init(this.$refs.piechart2)
-            pieChart.setOption(this.option)
+        drawCanvas: function() {
+            this.myChart = echarts.init(this.$refs.platformChart)
+            this.myChart.setOption(this.option)
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.piechart-canvas {
-    height: 300px;
+.platformChart-container {
+    font-size: 12px;
+    .content-title {
+        padding-left: 5px;
+        border-left: 3px solid #0bc4e9;
+    }
+    .platformChart-canvas {
+        height: 300px;
+    }
 }
 </style>

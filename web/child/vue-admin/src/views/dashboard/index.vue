@@ -2,23 +2,32 @@
 <template>
     <div class="dashboard-container">
         <header class="dashboard-header clearfix">
-            <div class="header-left fl">{{date}}</div>
-            <div class="header-center fl">物流大数据展示</div>
+            <div class="header-left fl">{{ date }}</div>
+            <div class="header-center fl">大数据屏</div>
             <div class="header-right fl"></div>
             <div class="header-bottom fl"></div>
         </header>
         <main class="dashboard-content clearfix">
             <div class="content-left fl">
                 <base-info class="dashboard-border" :baseInfo="baseInfo" />
-                <package-rank class="dashboard-border" :packageRank="packageRank" />
-                <pie-chart1 class="dashboard-border"></pie-chart1>
+                <package-rank
+                    class="dashboard-border"
+                    :packageRank="packageRank"
+                />
+                <shop-category
+                    class="dashboard-border"
+                    :shopCategory="shopCategory"
+                ></shop-category>
             </div>
             <div class="content-center fl">
                 <map-chart1 class="dashboard-border"></map-chart1>
-                <bar-chart1 class="dashboard-border"></bar-chart1>
+                <count-chart class="dashboard-border"/>
             </div>
             <div class="content-right fl">
-                <pie-chart2 class="dashboard-border"></pie-chart2>
+                <platform-chart
+                    class="dashboard-border"
+                    :platformData="platformData"
+                />
                 <bar-chart2 class="dashboard-border"></bar-chart2>
             </div>
         </main>
@@ -27,12 +36,17 @@
 
 <script>
 import { parseTime } from '@/utils/index.js'
-import { getBaseInfo, getpackageRank } from '@/api/dashboard'
+import {
+    getBaseInfo,
+    getpackageRank,
+    getShopCategory,
+    getPaltformData
+} from '@/api/dashboard'
 import BaseInfo from './components/baseInfo/index.vue'
 import PackageRank from './components/packageRank/index.vue'
-import PieChart1 from './components/pie/pieChart.vue'
-import PieChart2 from './components/pie/pieChart2.vue'
-import Barchart1 from './components/bar/barChart.vue'
+import ShopCategory from './components/pie/shopCategory.vue'
+import PlatformChart from './components/pie/platformChart.vue'
+import CountChart from './components/bar/countChart.vue'
 import Barchart2 from './components/bar/barChart2.vue'
 import Mapchart1 from './components/map/mapChart1.vue'
 export default {
@@ -40,15 +54,16 @@ export default {
         return {
             date: parseTime(),
             baseInfo: {},
-            packageRank: []
+            packageRank: [],
+            shopCategory: [],
+            platformData: []
         }
     },
     mounted() {
         this.timer = setInterval(() => {
             this.date = parseTime()
-        })
-        this.getBaseInfo()
-        this.getpackageRank()
+        }, 1000)
+        this.getAllData()
     },
     beforeDestroy() {
         if (this.timer) {
@@ -58,25 +73,26 @@ export default {
     components: {
         PackageRank,
         BaseInfo,
-        pieChart1: PieChart1,
-        pieChart2: PieChart2,
-        barChart1: Barchart1,
+        ShopCategory,
+        PlatformChart,
+        CountChart,
         barChart2: Barchart2,
         mapChart1: Mapchart1
     },
-
-    computed: {
-        // baseInfo: function() {
-        //     return this.getBaseInfo()
-        // }
-    },
-
     methods: {
+        getAllData: function() {
+            this.getBaseInfo()
+            this.getpackageRank()
+            this.getShopCategory()
+            this.getPaltformData()
+        },
+        // 获取基本信息
         getBaseInfo() {
             getBaseInfo().then(res => {
                 this.baseInfo = this.filterNum(res.data)
             })
         },
+        // 获取包裹排名
         getpackageRank() {
             getpackageRank().then(res => {
                 let data = res.data
@@ -84,15 +100,30 @@ export default {
                 data.forEach(item => {
                     let val = item.packageNum.toString()
                     if (val.length > 4) {
-                        paramList.push({...item, packageNum: val.slice(0, val.length - 4) + '万'}) 
-                        console.log(paramList)
-
+                        paramList.push({
+                            ...item,
+                            packageNum: val.slice(0, val.length - 4) + '万'
+                        })
                     } else {
                         paramList.push(item)
                     }
                 })
-            
+
                 this.packageRank = paramList
+            })
+        },
+
+        // 获取商品分类占比
+        getShopCategory() {
+            getShopCategory().then(res => {
+                this.shopCategory = res.data
+            })
+        },
+
+        // 获取平台占比
+        getPaltformData() {
+            getPaltformData().then(res => {
+                this.platformData = res.data
             })
         },
         filterNum(data) {
@@ -161,6 +192,7 @@ export default {
         height: calc(100% - 100px);
         width: 100%;
         padding: 10px 5px;
+        overflow: hidden;
         .content-left {
             width: 25%;
             height: 100%;

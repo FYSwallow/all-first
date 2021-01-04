@@ -13,3 +13,15 @@ export function getpackageRank() {
         method: 'get',
     })
 }
+export function getShopCategory() {
+    return request({
+        url: '/vue-element-admin/dashboard/shopCategory',
+        method: 'get',
+    })
+}
+export function getPaltformData() {
+    return request({
+        url: '/vue-element-admin/dashboard/platformData',
+        method: 'get',
+    })
+}

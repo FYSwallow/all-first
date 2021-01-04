@@ -1,11 +1,13 @@
 <template>
-    <div class="barchart-container">
-        <div class="barchart-canvas" ref="barchart2"></div>
+    <div class="worldRank-container">
+        <div class="content-title">全球贸易国家城市排行</div>
+        <div class="worldRank-canvas" ref="worldRank"></div>
     </div>
 </template>
 
 <script>
 import * as echarts from 'echarts'
+import mixin from '../mixin'
 export default {
     data() {
         let labelimg = ''
@@ -578,20 +580,28 @@ export default {
             }
         }
     },
+    mixins: [mixin],
     mounted() {
-        this.drawerCanvas()
+        this.drawCanvas()
     },
     methods: {
-        drawerCanvas: function() {
-            let barchart = echarts.init(this.$refs.barchart2)
-            barchart.setOption(this.option)
+        drawCanvas: function() {
+            this.myChart = echarts.init(this.$refs.worldRank)
+            this.myChart.setOption(this.option)
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.barchart-canvas {
-    height: 300px;
+.worldRank-container {
+    font-size: 12px;
+    .content-title {
+        padding-left: 5px;
+        border-left: 3px solid #0bc4e9;
+    }
+    .worldRank-canvas {
+        height: 300px;
+    }
 }
 </style>

@@ -1,12 +1,20 @@
 <template>
-    <div class="piechart-container">
-        <div class="piechart-canvas" ref="piechart"></div>
+    <div class="shopCategory-container">
+        <div class="content-title">商品分类占比</div>
+        <div class="shopCategory-canvas" ref="shopCategory"></div>
     </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
+import mixin from '../mixin'
 export default {
+    props: {
+        shopCategory: {
+            // type: Array,
+            // default: []
+        }
+    },
     data() {
         return {
             option: {
@@ -148,40 +156,7 @@ export default {
                                 }
                             }
                         },
-                        data: [
-                            {
-                                name: '化妆品',
-                                value: 3
-                            },
-                            {
-                                name: '手机',
-                                value: 2
-                            },
-                            {
-                                name: '电脑',
-                                value: 26
-                            },
-                            {
-                                name: '羽绒服',
-                                value: 24
-                            },
-                            {
-                                name: '扫地机',
-                                value: 12
-                            },
-                            {
-                                name: '电视',
-                                value: 11
-                            },
-                            {
-                                name: '洗发露',
-                                value: 3
-                            },
-                            {
-                                name: '其它',
-                                value: 2
-                            }
-                        ]
+                        data: []
                     },
                     {
                         type: 'pie',
@@ -232,23 +207,35 @@ export default {
                         ]
                     }
                 ]
-            }
+            },
+            myChart: {}
         }
     },
-    mounted(){
-        this.drawerCancas()
+    mixins: [mixin],
+    watch: {
+        shopCategory: function() {
+            this.option.series[0].data = this.shopCategory
+            this.drawCanvas()
+        }
     },
     methods: {
-        drawerCancas: function() {
-            let pieChart = echarts.init(this.$refs.piechart)
-            pieChart.setOption(this.option)
+        drawCanvas: function() {
+            this.myChart = echarts.init(this.$refs.shopCategory)
+            this.myChart.setOption(this.option)
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.piechart-canvas {
-    height: 300px;
+.shopCategory-container {
+    font-size: 12px;
+    .content-title {
+        padding-left: 5px;
+        border-left: 3px solid #0bc4e9;
+    }
+    .shopCategory-canvas {
+        height: 300px;
+    }
 }
 </style>
