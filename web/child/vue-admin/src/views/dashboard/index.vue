@@ -1,36 +1,30 @@
 <!--  -->
 <template>
     <div class="dashboard-container">
-        <header class="dashboard-header clearfix">
-            <div class="header-left fl">{{ date }}</div>
-            <div class="header-center fl">大数据屏</div>
-            <div class="header-right fl"></div>
-            <div class="header-bottom fl"></div>
-        </header>
-        <main class="dashboard-content clearfix">
-            <div class="content-left fl">
-                <base-info class="dashboard-border" :baseInfo="baseInfo" />
-                <package-rank
-                    class="dashboard-border"
-                    :packageRank="packageRank"
-                />
-                <shop-category
-                    class="dashboard-border"
-                    :shopCategory="shopCategory"
-                ></shop-category>
-            </div>
-            <div class="content-center fl">
-                <map-chart1 class="dashboard-border"></map-chart1>
-                <count-chart class="dashboard-border"/>
-            </div>
-            <div class="content-right fl">
-                <platform-chart
-                    class="dashboard-border"
-                    :platformData="platformData"
-                />
-                <bar-chart2 class="dashboard-border"></bar-chart2>
-            </div>
-        </main>
+        <dv-loading v-if="loading">Loading...</dv-loading>
+        <div v-else>
+            <header class="dashboard-header clearfix">
+                <div class="header-left fl">{{ date }}</div>
+                <div class="header-center fl">大数据屏</div>
+                <div class="header-right fl"></div>
+                <div class="header-bottom fl"></div>
+            </header>
+            <main class="dashboard-content clearfix">
+                <div class="content-left fl">
+                    <dv-border-box-1><base-info class="dashboard-border" :baseInfo="baseInfo" /></dv-border-box-1>
+                    <dv-border-box-8><package-rank class="dashboard-border" :packageRank="packageRank" /></dv-border-box-8>
+                    <shop-category class="dashboard-border" :shopCategory="shopCategory"></shop-category>
+                </div>
+                <div class="content-center fl">
+                    <dv-border-box-11 title="dv-border-box-11"><map-chart1 class="dashboard-border"></map-chart1></dv-border-box-11>
+                    <count-chart class="dashboard-border" />
+                </div>
+                <div class="content-right fl">
+                    <platform-chart class="dashboard-border" :platformData="platformData" />
+                    <bar-chart2 class="dashboard-border"></bar-chart2>
+                </div>
+            </main>
+        </div>
     </div>
 </template>
 
@@ -56,7 +50,8 @@ export default {
             baseInfo: {},
             packageRank: [],
             shopCategory: [],
-            platformData: []
+            platformData: [],
+            loading: true
         }
     },
     mounted() {
@@ -80,11 +75,12 @@ export default {
         mapChart1: Mapchart1
     },
     methods: {
-        getAllData: function() {
-            this.getBaseInfo()
-            this.getpackageRank()
-            this.getShopCategory()
-            this.getPaltformData()
+        getAllData: async function() {
+            await this.getBaseInfo()
+            await this.getpackageRank()
+            await this.getShopCategory()
+            await this.getPaltformData()
+            this.loading = false
         },
         // 获取基本信息
         getBaseInfo() {
