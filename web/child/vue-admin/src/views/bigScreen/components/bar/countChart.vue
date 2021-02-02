@@ -1,8 +1,5 @@
 <template>
-    <div class="countChart-container">
-        <div class="content-title">月统计</div>
-        <div class="countChart-canvas" ref="countChart"></div>
-    </div>
+    <div class="countChart-canvas" ref="countChart"></div>
 </template>
 
 <script>
@@ -247,14 +244,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.countChart-container {
-    font-size: 12px;
-    .content-title {
-        padding-left: 5px;
-        border-left: 3px solid #0bc4e9;
-    }
-    .countChart-canvas {
-        height: 300px;
-    }
+.countChart-canvas {
+    height: 100%;
 }
 </style>

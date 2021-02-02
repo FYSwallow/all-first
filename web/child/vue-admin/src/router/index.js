@@ -13,6 +13,12 @@ export const constantRoutes = [
         component: () => import('@/views/login/index')
     },
     {
+        path: '/bigScreen',
+        name: '数据大屏',
+        hidden: 'true', // 不显示在导航菜单中
+        component: () => import('@/views/bigScreen/index')
+    },
+    {
         path: '/',
         component: Layout,
         redirect: '/dashboard',

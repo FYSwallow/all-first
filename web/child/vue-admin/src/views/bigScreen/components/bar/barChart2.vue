@@ -1,8 +1,5 @@
 <template>
-    <div class="worldRank-container">
-        <div class="content-title">全球贸易国家城市排行</div>
-        <div class="worldRank-canvas" ref="worldRank"></div>
-    </div>
+    <div class="worldRank-canvas" ref="worldRank"></div>
 </template>
 
 <script>
@@ -52,7 +49,7 @@ export default {
                     position: 'top'
                 },
 
-                // 
+                //
                 xAxis: {
                     type: 'category',
                     data: [
@@ -594,14 +591,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.worldRank-container {
-    font-size: 12px;
-    .content-title {
-        padding-left: 5px;
-        border-left: 3px solid #0bc4e9;
-    }
-    .worldRank-canvas {
-        height: 300px;
-    }
+.worldRank-canvas {
+    height: 100%;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="mapchart-container">
-        <div class="mapchart-canvas" ref="mapchart1"></div>
+        <!-- <div class="mapchart-canvas" ref="mapchart1"></div> -->
     </div>
 </template>
 
@@ -447,7 +447,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mapchart-canvas {
-    height: 300px;
+.mapchart-container {
+    height: 100%;
+    .mapchart-canvas {
+        padding-top: 40px;
+        padding-left: -10px;
+        height: 100%;
+    }
 }
 </style>

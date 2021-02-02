@@ -13,3 +13,17 @@ export function parseTime(time) {
         // 拼接 时间格式处理
     return year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes + ':' + seconds + ' ' + weekArr[week]
 }
+
+export function debounce(func, wait) {
+    let timer = null
+    return function() {
+        let context = this
+        let args = arguments
+        if (!timer) {
+            timer = setTimeout(function() {
+                func.apply(context, args)
+                timer = null
+            }, wait)
+        }
+    }
+}

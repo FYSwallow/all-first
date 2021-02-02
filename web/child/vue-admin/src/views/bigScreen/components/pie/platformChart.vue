@@ -1,8 +1,5 @@
 <template>
-    <div class="platformChart-container">
-        <div class="content-title">各平台占比</div>
-        <div class="platformChart-canvas" ref="platformChart"></div>
-    </div>
+    <div class="platformChart-canvas" ref="platformChart"></div>
 </template>
 
 <script>
@@ -133,14 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.platformChart-container {
-    font-size: 12px;
-    .content-title {
-        padding-left: 5px;
-        border-left: 3px solid #0bc4e9;
-    }
-    .platformChart-canvas {
-        height: 300px;
-    }
+.platformChart-canvas {
+    height: 100%;
 }
 </style>

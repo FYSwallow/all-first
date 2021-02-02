@@ -1,8 +1,5 @@
 <template>
-    <div class="shopCategory-container">
-        <div class="content-title">商品分类占比</div>
-        <div class="shopCategory-canvas" ref="shopCategory"></div>
-    </div>
+    <div class="shopCategory-canvas" ref="shopCategory"></div>
 </template>
 
 <script>
@@ -228,14 +225,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.shopCategory-container {
-    font-size: 12px;
-    .content-title {
-        padding-left: 5px;
-        border-left: 3px solid #0bc4e9;
-    }
-    .shopCategory-canvas {
-        height: 300px;
-    }
+.shopCategory-canvas {
+    height: 100%;
 }
 </style>
