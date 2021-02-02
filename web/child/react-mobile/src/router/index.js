@@ -1,49 +1,24 @@
+import asyncComponent from './../components/asyncComponent'
+const Home = asyncComponent(() => import('../pages/index'))
+const Test = asyncComponent(() => import('../pages/test'))
 
-import Index from '../pages/index.jsx'
-
-export default [
-    { 
-      path: '',
-      exact: true,
-      meta: {
-        title: '首页',
-      },
-      component: Index
-    }, 
-    { 
-      path: '',
-      exact: true,
-      meta: {
-        title: 'button',
-      },
-      name: 'button按钮',
-      component: Index
-    }, 
-    { 
-      path: '',
-      exact: true,
-      meta: {
-        title: '首页',
-      },
-      name: 'Icon图标',
-      component: Index
-    }, 
-    { 
-      path: '',
-      exact: true,
-      meta: {
-        title: '首页',
-      },
-      name: 'Icon图标',
-      component: Index
-    }, 
-    { 
-      path: '',
-      exact: true,
-      meta: {
-        title: '首页',
-      },
-      name: 'Icon图标',
-      component: Index
-    }, 
+const router = [
+    {
+        path: '/',
+        exact: true,
+        meta: {
+            title: '首页'
+        },
+        component: Home
+    },
+    {
+        path: '/test',
+        exact: true,
+        meta: {
+            title: '测试'
+        },
+        component: Test
+    }
 ]
+
+export default router

@@ -1,16 +1,21 @@
 import React from 'react'
+import { HashRouter as Router, Switch } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
 
-function App() {
-    const len = 3000
+import router from './router/index'
+
+const routes = [
+    ...router
+]
+
+function App () {
     return (
-        <ul>
-            {
-                Array(len).fill(0).map((item, i) => {
-                    return <li key={i}>{item}</li>
-                })
-            }
-        </ul>
-        )
+        <Router>
+            <Switch>
+                {renderRoutes(routes)}
+            </Switch>
+        </Router>
+    )
 }
 
 export default App
