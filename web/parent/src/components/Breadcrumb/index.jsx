@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Breadcrumb } from 'antd';
-import menuConfig from '../../config/menuConfig'
+import menuConfig from '../../router/config'
 
 function MyBreadcrumb(props) {
     console.log(props.location)

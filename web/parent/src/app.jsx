@@ -3,24 +3,17 @@ import React from 'react'
 // 状态管理组件
 import { AppStore } from './store/index'
 // 路由组件
-import { HashRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config'
 
-// 导入组件文件
-import Permission from './permission'
-import AuthLogin from './authLogin'
-import Layout from './layout/index'
-import Login from './views/login/index'
+import { layoutRouteList } from './router/utils'
 
 function App() {
     return (
         <AppStore>
             <Router>
                 <Switch>
-                    {/* 权限控制,默认登录/app页面,如果存在用户信息,则重定向至主界面 */}
-                    <AuthLogin path="/login" component={Login} />
-                    {/* 权限控制,默认登录/app页面,如果不存在用户信息,则重定向至登录界面 */}
-                    <Permission path="/" component={Layout}></Permission>
-                    <Redirect from="/*" to="/" />
+                    {renderRoutes(layoutRouteList)}
                 </Switch>
             </Router>
         </AppStore>

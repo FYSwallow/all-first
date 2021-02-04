@@ -4,7 +4,7 @@ import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import { AppInfo } from '../../store/index'
 
-import menuConfig from '../../config/menuConfig'
+import menuConfig from '../../router/config'
 
 const { SubMenu, Item } = Menu;
 

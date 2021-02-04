@@ -1,5 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
+import './style/index.scss'
 
 function List (props) {
     const {
@@ -11,15 +12,24 @@ function List (props) {
         ...restProps
     } = props
 
-    const wrapCls = classnames(className)
+    const prefixCls = 'am-list'
+    const wrapCls = classnames(prefixCls, className)
+
     return (
         <div style={style} className={wrapCls} {...restProps}>
-            { renderHeader
-                ? (
-                    <div>123</div>
-                )
-                : null}
-            {children}
+            {/* eslint multiline-ternary: ["error", "never"] */ }
+            { renderHeader ? (<div className={`${prefixCls}-header`}>
+                {typeof renderHeader === 'function' ? renderHeader() : renderHeader }
+            </div>
+            ) : null}
+            { children ? (
+                <div className={`${prefixCls}-body`}>{children}</div>
+            ) : null}
+            { renderFooter ? (
+                <div className={`${prefixCls}-footer`}>
+                    {typeof renderHeader === 'function' ? renderFooter() : renderFooter }
+                </div>
+            ) : null}
         </div>
     )
 }

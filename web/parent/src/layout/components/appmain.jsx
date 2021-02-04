@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
-import menuConfig from '../../config/menuConfig'
+import menuConfig from '../../router/config'
 
 let menuList = []
 
