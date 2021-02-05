@@ -25,13 +25,14 @@ import asyncComponent from './../components/aysncComponent';
 // import Permission from './permission'
 // import AuthLogin from './authLogin'
 // import Layout from './layout/index'
-import Login from '../views/login/index'
+import UserLayout from '../layout/userLayout'
+import Layout from '../layout/index'
 
 const routes = [
     {
         title: '首页',
         path: '/system',
-        component: asyncComponent(() => import('../layout/userLayout')),
+        component: UserLayout,
         redirect: '/system/login',
         meta: {
             title: '系统路由',
@@ -40,7 +41,7 @@ const routes = [
             {
                 title: '登录',
                 path: '/system/login',
-                component: Login,
+                component: asyncComponent(() => import('../views/login/index')),
                 meta: {
                     title: '用户登录',
                 },
@@ -57,10 +58,10 @@ const routes = [
     },
     {
         path: '/',
-        component: Dashboard,
-        ridirect: '/dashboard',
+        component: Layout,
+        redirect: '/dashboard',
         meta: {
-            title: '系统',
+            title: '主页',
         },
         children: [
             {

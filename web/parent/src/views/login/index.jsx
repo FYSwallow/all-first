@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, Card } from 'antd';
 
-import {setToken} from '../../utils/auth'
+import { setToken } from '../../utils/auth'
 
 import './login.scss'
 
@@ -26,7 +26,7 @@ function Login(props) {
         setToken(username)
         props.history.replace(hash || '/')
     }
-    return (    
+    return (
         <div className="login">
             <Card title="用户登录" className="login-card">
                 <Form
@@ -36,7 +36,7 @@ function Login(props) {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                    initialValues = {{
+                    initialValues={{
                         username: 'admin',
                         password: '123456',
                     }}
@@ -51,7 +51,7 @@ function Login(props) {
                             },
                         ]}
                     >
-                        <Input/>
+                        <Input />
                     </Form.Item>
 
                     <Form.Item
@@ -64,7 +64,7 @@ function Login(props) {
                             },
                         ]}
                     >
-                        <Input.Password/>
+                        <Input.Password />
                     </Form.Item>
 
                     <Form.Item {...tailLayout}>

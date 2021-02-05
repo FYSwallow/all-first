@@ -124,6 +124,7 @@ export default {
 }
 .mobile {
     .main-container {
+        margin-left: 0;
         .fixed-header {
             width: 100%;
         }
@@ -132,9 +133,6 @@ export default {
 .mobile.hideSideBar {
     .sidebar-container {
         transform: translateX(-100%);
-    }
-    .main-container {
-        margin-left: 0;
     }
 }
 .withoutAnimation {

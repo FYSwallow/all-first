@@ -12,11 +12,11 @@ function asyncComponent(importComponent) {
         useEffect(() => {
             const fetchComponent = async() => {
                 const {default: Component} = await importComponent()
-                document.title = props.route.meta.title || 'react-admin'
+                // document.title = props.routes.meta.title
                 setComponent(<Component {...props}></Component>)
             }
             fetchComponent()
-        }, [])
+        }, [props])
 
         return component
     }

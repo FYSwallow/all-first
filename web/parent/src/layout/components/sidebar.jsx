@@ -17,14 +17,14 @@ function SideBar(props) {
         return list.map((item) => {
             if (item.children) {
                 return (
-                    <SubMenu key={item.key} icon={item.icon? <item.icon />: null} title={item.title}>
+                    <SubMenu key={item.path} icon={item.icon? <item.icon />: null} title={item.meta.title}>
                         {getMenuNodes(item.children)}
                     </SubMenu>
                 )
             } else {
                 return (
-                    <Item key={item.key} icon={item.icon? <item.icon />: null} onClick={props.hide}>
-                        <Link to={item.key}>{item.title}</Link>
+                    <Item key={item.path} icon={item.icon? <item.icon />: null} onClick={props.hide}>
+                        <Link to={item.path}>{item.meta.title}</Link>
                     </Item>
                 )
             }

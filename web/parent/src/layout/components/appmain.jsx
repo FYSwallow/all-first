@@ -11,7 +11,7 @@ function mapMenuList(list) {
             mapMenuList(item.children)
         } else {
 
-            menuList.push(<Route path={item.key} component={item.component} key={item.key}></Route>)
+            menuList.push(<Route path={item.path} component={item.component} key={item.path}></Route>)
         }
     })
     return menuList
@@ -20,12 +20,11 @@ function AppMain() {
     return (
         <div className="app-main" id="subapp-viewport">
             <Switch>
-                <Redirect from='/' exact to='/dashboard' /> 
                 {
                     mapMenuList(menuConfig)
                 }
                 {/* 没有则跳转到404 */}
-                
+                <Redirect from='/' exact to='/dashboard' /> 
             </Switch>
         </div>
     );

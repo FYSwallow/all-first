@@ -36,8 +36,8 @@ function getLayoutRoutelist() {
  * @returns
  */
 function getSystemRoutelist() {
-    const routeList = routes.filter((item) => item.path === '/system')
-    return flatterRoute(routeList, true, false)
+    const route = routes.find((item) => item.path === '/system')
+    return flatterRoute(route.children, true, false)
 }
 
 /**
@@ -45,8 +45,8 @@ function getSystemRoutelist() {
  * @returns
  */
 function getBusinessRoutelist() {
-    const routeList = routes.filter((item) => item.path === '/')
-    return flatterRoute(routeList, false, false)
+    const route = routes.find((item) => item.path === '/')
+    return flatterRoute(route.children, false, false)
 }
 
 export const layoutRouteList = getLayoutRoutelist()
