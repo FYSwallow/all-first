@@ -20,11 +20,11 @@ const tailLayout = {
     },
 }
 function Login(props) {
-    const hash = props.location.search.replace('?redirect=', '')
+    const hash = props.location.search.replace('?redirectUrl=', '')
     const onFinish = async (values) => {
         const { username } = values
         setToken(username)
-        props.history.replace(hash || '/')
+        props.history.replace({pathname: hash || '/'})
     }
     return (
         <div className="login">
@@ -36,6 +36,7 @@ function Login(props) {
                         remember: true,
                     }}
                     onFinish={onFinish}
+                    // eslint-disable-next-line react/jsx-no-duplicate-props
                     initialValues={{
                         username: 'admin',
                         password: '123456',

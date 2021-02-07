@@ -1,40 +1,45 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 
 import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import { AppInfo } from '../../store/index'
 
-import menuConfig from '../../router/config'
+import { businessMenuList } from '../../router/utils'
+import { privateRoute } from '../../router/config'
 
 const { SubMenu, Item } = Menu;
 
 function SideBar(props) {
-    const {state } = useContext(AppInfo)
+    const { state } = useContext(AppInfo)
     const path = props.location.pathname
-    const {sidebar} = state
+    const { sidebar } = state
     //获取菜单列表 
-    function getMenuNodes(list) {
-        return list.map((item) => {
-            if (item.children) {
+
+    function renderMenu(routeList) {
+        return routeList.map(route => {
+           
+            if (route.children) {
+                // 单个菜单扁平化处理
+                if (hasOneShowingChild(route.children)) {
+                    return renderMenu(route.children)
+                }
                 return (
-                    <SubMenu key={item.path} icon={item.icon? <item.icon />: null} title={item.meta.title}>
-                        {getMenuNodes(item.children)}
+                    <SubMenu key={route.path} icon={route.icon ? <route.icon /> : null} title={route.meta.title}>
+                        {renderMenu(route.children)}
                     </SubMenu>
                 )
-            } else {
-                return (
-                    <Item key={item.path} icon={item.icon? <item.icon />: null} onClick={props.hide}>
-                        <Link to={item.path}>{item.meta.title}</Link>
-                    </Item>
-                )
             }
+            return (
+                <Item key={route.path} icon={route.icon ? <route.icon /> : null} onClick={props.hide}>
+                    <Link to={route.path}>{route.meta.title}</Link>
+                </Item>
+            )
         })
     }
 
-    //获取展开项
-    function getOpenKey(){
+    function getOpenKey() {
         let openKey = []
-        menuConfig.forEach(item => {
+        businessMenuList.forEach(item => {
             if (item.children) {
                 // 查找一个与当前请求路径匹配的子Item
                 const cItem = item.children.find(cItem => cItem.key === path)
@@ -45,7 +50,14 @@ function SideBar(props) {
             }
         })
     }
-    
+
+    function hasOneShowingChild(children) {
+        if (children.length === 1) {
+            return true
+        }
+        return false
+    }
+
     return (
         <div className='sidebar'>
             <Menu
@@ -55,7 +67,7 @@ function SideBar(props) {
                 theme="dark"
                 inlineCollapsed={sidebar.collapsed}
             >
-                {getMenuNodes(menuConfig)}
+                {renderMenu(businessMenuList)}
             </Menu>
         </div>
     );

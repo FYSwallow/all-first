@@ -14,26 +14,15 @@ import {
 import Dashboard from '../views/dashboard/index'
 import H5 from '../views/H5/index' // 语义化
 import Drag from '../views/drag/index'
-import Charts from '../views/charts/index'
-import Semantic from '../views/charts/index'
-import Table from '../views/charts/index'
-import AppConfig from '../views/app/config'
-import AppSpecial from '../views/app/special'
 import asyncComponent from './../components/aysncComponent';
 
-// 导入组件文件
-// import Permission from './permission'
-// import AuthLogin from './authLogin'
-// import Layout from './layout/index'
 import UserLayout from '../layout/userLayout'
 import Layout from '../layout/index'
 
 const routes = [
     {
-        title: '首页',
         path: '/system',
         component: UserLayout,
-        redirect: '/system/login',
         meta: {
             title: '系统路由',
         },
@@ -59,102 +48,125 @@ const routes = [
     {
         path: '/',
         component: Layout,
-        redirect: '/dashboard',
         meta: {
             title: '主页',
         },
         children: [
             {
-                title: '首页',
                 path: '/dashboard',
                 icon: PieChartOutlined,
                 component: Dashboard,
+                meta: {
+                    title: '首页',
+                },
             },
             {
-                title: 'h5',
+                path: '/nested',
+                icon: PieChartOutlined,
+                component: Dashboard,
+                meta: {
+                    title: '嵌套',
+                },
+                children: [
+                    {
+                        path: '/nested/menu1',
+                        component: Dashboard,
+                        meta: {
+                            title: '层级1',
+                        },
+                        children: [
+                            {
+                                path: '/nested/menu1/menu1-1',
+                                component: Dashboard,
+                                meta: {
+                                    title: '层级1-1',
+                                },
+                                children: [
+                                    {
+                                        path: '/nested/menu1/menu1-1/menu1-1-1',
+                                        component: Dashboard,
+                                        meta: {
+                                            title: '层级1-1-1',
+                                        },
+                                    },
+                                    {
+                                        path: '/nested/menu1/menu1-1/menu1-1-2',
+                                        component: Dashboard,
+                                        meta: {
+                                            title: '层级1-1-2',
+                                        },
+                                    }
+                                ]
+                            },
+                            {
+                                path: '/nested/menu1/menu1-2',
+                                component: Dashboard,
+                                meta: {
+                                    title: '层级1-2',
+                                },
+                            }
+                        ]
+                    },
+                    {
+                        path: '/nested/menu2',
+                        component: Dashboard,
+                        meta: {
+                            title: '层级2',
+                        },
+                    }
+                ]
+            },
+            {
                 path: '/h5',
                 icon: PicRightOutlined,
                 component: H5,
+                meta: {
+                    title: 'h5',
+                },
             },
             {
-                title: 'UI组件',
-                path: '/ui',
-                icon: AppstoreOutlined,
-                children: [ // 子菜单列表
-                    {
-                        title: '应用管理',
-                        path: '/config',
-                        component: AppConfig,
-                    },
-                    {
-                        title: '专题管理',
-                        path: '/special',
-                        component: AppSpecial,
-                    }
-                ]
-            },
-            {
-                title: '拖拽',
                 path: '/drag',
                 icon: DragOutlined,
                 component: Drag,
+                meta: {
+                    title: '拖拽',
+                },
             },
             {
-                title: 'App配置管理',
-                path: '/app',
-                icon: AppstoreOutlined,
-                children: [ // 子菜单列表
-                    {
-                        title: '应用管理',
-                        path: '/config',
-                        component: AppConfig,
-                    },
-                    {
-                        title: '专题管理',
-                        path: '/special',
-                        component: AppSpecial,
-                    }
-                ]
-            },
-            {
-                title: '语义化布局',
-                path: '/semantic',
-                icon: LineChartOutlined,
-                component: Semantic,
-            },
-
-            {
-                title: '图标',
-                path: '/charts',
-                icon: PieChartOutlined,
-                component: Charts,
-            },
-            {
-                title: '数据管理',
-                path: '/database',
-                icon: MailOutlined,
-                children: [ // 子菜单列表
-                    {
-                        title: '商铺管理',
-                        path: '/shop',
-                        component: Charts,
-                    },
-                    {
-                        title: '食品管理',
-                        path: '/food',
-                        component: Charts,
-                    }
-                ]
-            },
-            {
-                title: '表格',
-                path: '/table',
+                path: '/error',
+                meta: {
+                    title: '异常页面',
+                },
                 icon: TableOutlined,
-                component: Table,
-
+                component: asyncComponent(() => import('../views/userSetting/index')),
+                children: [
+                    {
+                        path: '/error/404',
+                        meta: {
+                            title: '404页面'
+                        },
+                        component: asyncComponent(() => import('../views/error/404'))
+                    }
+                ]
+            },
+            {
+                path: '/user',
+                meta: {
+                    title: '权限设置',
+                },
+                icon: TableOutlined,
+                component: asyncComponent(() => import('../views/userSetting/index')),
             },
         ]
     }
 ]
 
+export const privateRoute = {
+    'admin': {
+        permission: ["/dashboard", "/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/h5", "/drag", "/user"]
+    },
+    'guest': {
+        permission: ["/nested/menu1/menu1-1/menu1-1-1", "/drag", "/dashboard"]
+    }
+}
 export default routes

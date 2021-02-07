@@ -19,8 +19,8 @@ function MyDropDown(props) {
         </Menu>
     );
     function logOut() {
+        props.history.replace('/system/login')   
         removeToken()
-        props.history.replace('/login')   
     }
     return (
         <Dropdown overlay={menu} trigger={['click']}>

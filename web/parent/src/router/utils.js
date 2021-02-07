@@ -1,5 +1,4 @@
 import routes from './config'
-
 /**
  * 根据不同场景获取对应的路由列表
  * @param {*} routerList 路由列表
@@ -46,14 +45,43 @@ function getSystemRoutelist() {
  */
 function getBusinessRoutelist() {
     const route = routes.find((item) => item.path === '/')
+    return flatterRoute(route.children, true, false)
+}
+
+/**
+ * 获取业务路由菜单项
+ * @returns
+ */
+function getBusinessMenulist() {
+    const route = routes.find((item) => item.path === '/')
     return flatterRoute(route.children, false, false)
+}
+
+/**
+ * 获取树形组件需要的列表
+ */
+function getTreeMenuList(list) {
+    return list.map(item => {
+        // console.log(item)
+
+        const obj = {
+            title: item.meta.title,
+            key: item.path,
+        }
+        if (item.children) {
+            Object.assign(obj, { children: getTreeMenuList(item.children) })
+        }
+        return obj
+    })
 }
 
 export const layoutRouteList = getLayoutRoutelist()
 export const systemRouteList = getSystemRoutelist()
 export const businessRouteList = getBusinessRoutelist()
+export const businessMenuList = getBusinessMenulist()
+export const treeMenuList = getTreeMenuList(getBusinessMenulist())
 
 export const getPageTitle = (routeList, pathname) => {
     const result = routeList.find(child => child.path === pathname)
-    return result = result? result.meta.title: 'react-admin'
+    return result = result ? result.meta.title : 'react-admin'
 }
