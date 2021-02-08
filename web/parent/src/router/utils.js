@@ -75,6 +75,10 @@ function getTreeMenuList(list) {
     })
 }
 
+/**
+ * 获取侧边栏导航菜单
+ */
+
 export const layoutRouteList = getLayoutRoutelist()
 export const systemRouteList = getSystemRoutelist()
 export const businessRouteList = getBusinessRoutelist()

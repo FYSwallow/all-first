@@ -6,20 +6,23 @@ import { AppStore } from './store/index'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { layoutRouteList } from './router/utils'
 
-const routeList = layoutRouteList.map(route => {
-    return <Route
-        path={route.path}
-        component={route.component}
-        key={route.path}
-    ></Route>
-})
+const renderRoutes = (routes) => {
+    return routes.map(route => {
+        const { component: Component } = route
+        return <Route
+            path={route.path}
+            key={route.path}
+            component={Component}
+        ></Route>
+    })
+}
 
 function App() {
     return (
         <AppStore>
             <Router>
                 <Switch>
-                    {routeList}
+                    {renderRoutes(layoutRouteList)}
                 </Switch>
             </Router>
         </AppStore>

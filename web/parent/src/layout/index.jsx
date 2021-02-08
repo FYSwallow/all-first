@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { AppMain, NavHeader, SideBar } from './components/index'
 import RightPanel from '../components/rightPanel/index'
 import { AppInfo, UPDATE_SCREEN, CLOSE_SIDEBAR } from '../store/index'
+import Auth from './auth'
 
 const { body } = document
 const WIDTH = 750
@@ -39,22 +40,25 @@ function BaseLayout(props) {
     }
 
     function toggleSidebar() {
+        console.log({ sidebar: { collapsed: !collapsed, withoutAnimation: false } } })
         dispatch({ type: CLOSE_SIDEBAR, data: { sidebar: { collapsed: !collapsed, withoutAnimation: false } } })
     }
 
     return (
-        <div className={["app-wrapper", collapsed ? 'hideSidebar' : 'openSidebar', withoutAnimation ? "withoutAnimation" : "", screen === 'mobile' ? 'mobile-app' : 'pc-app'].join(' ')}>
-            {screen === 'mobile' && !collapsed ? <div className="drawer-bg" onClick={closeSidebar} /> : null}
-            {/* 在h5窗口大小下,始终显示为 */}
-            <SideBar />
-            <div className="main-container">
-                <div className='fixed-header'>
-                    <NavHeader toggle={toggleSidebar} />
+        <Auth {...props}>
+            <div className={["app-wrapper", collapsed ? 'hideSidebar' : 'openSidebar', withoutAnimation ? "withoutAnimation" : "", screen === 'mobile' ? 'mobile-app' : 'pc-app'].join(' ')}>
+                {screen === 'mobile' && !collapsed ? <div className="drawer-bg" onClick={closeSidebar} /> : null}
+                {/* 在h5窗口大小下,始终显示为 */}
+                <SideBar />
+                <div className="main-container">
+                    <div className='fixed-header'>
+                        <NavHeader toggle={toggleSidebar} />
+                    </div>
+                    <AppMain />
                 </div>
-                <AppMain />
+                <RightPanel />
             </div>
-            <RightPanel />
-        </div>
+        </Auth>
     );
 }
 export default BaseLayout

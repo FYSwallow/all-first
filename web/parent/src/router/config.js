@@ -1,13 +1,7 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-
 import {
-    LineChartOutlined,
     PicRightOutlined,
     PieChartOutlined,
-    MailOutlined,
     TableOutlined,
-    AppstoreOutlined,
     DragOutlined
 } from '@ant-design/icons'
 
@@ -17,7 +11,7 @@ import Drag from '../views/drag/index'
 import asyncComponent from './../components/aysncComponent';
 
 import UserLayout from '../layout/userLayout'
-import Layout from '../layout/index'
+import Layout from '../layout/baseLayout'
 
 const routes = [
     {
@@ -163,10 +157,10 @@ const routes = [
 
 export const privateRoute = {
     'admin': {
-        permission: ["/dashboard", "/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/h5", "/drag", "/user"]
+        permission:  ["/dashboard", "/nested",'/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/error", "/error/404", "/user"]
     },
     'guest': {
-        permission: ["/nested/menu1/menu1-1/menu1-1-1", "/drag", "/dashboard"]
+        permission: ["/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/dashboard", "/error", "/error/404"]
     }
 }
 export default routes

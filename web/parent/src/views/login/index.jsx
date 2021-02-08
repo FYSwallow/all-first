@@ -1,7 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Form, Input, Button, Card } from 'antd';
-
-import { setToken } from '../../utils/auth'
+import { reqLogin } from '../../store/module/user'
 
 import './login.scss'
 
@@ -22,9 +22,8 @@ const tailLayout = {
 function Login(props) {
     const hash = props.location.search.replace('?redirectUrl=', '')
     const onFinish = async (values) => {
-        const { username } = values
-        setToken(username)
-        props.history.replace({pathname: hash || '/'})
+        props.reqLogin(values)
+        props.history.replace({ pathname: hash || '/' })
     }
     return (
         <div className="login">
@@ -77,4 +76,7 @@ function Login(props) {
     )
 }
 
-export default Login
+export default connect(
+    () => ({}),
+    { reqLogin }
+)(Login)

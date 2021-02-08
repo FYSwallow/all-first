@@ -1,23 +1,43 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { getToken } from '../utils/auth'
-import { privateRoute } from '../router/config'
+import React, { useEffect, useState } from 'react'
+import { Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { reqUserMenu } from '../store/module/user'
+
 function Auth(props) {
     const { pathname, search } = props.location
-    const role = getToken()
-    if (!role) {
-        return (
-            <Redirect
+    const [compontent, setComponent] = useState(null)
+
+    async function getComponent() {
+        let renderNode = null
+        const role = props.token
+        if (!role) {
+            renderNode = (<Redirect
                 to={`/system/login?redirectUrl=${pathname + search}`}
-            />
-        )
+            />)
+        } else {
+            const hasPermission = props.menuList && props.menuList.length > 0
+            if (!hasPermission) {
+                props.reqUserMenu(role)
+            }
+            renderNode = (<>{props.children}</>)
+        }
+        setComponent(renderNode)
     }
-    if (privateRoute[role].permission.includes(pathname)) {
-        return <>{props.children}</>
-    }
-    return (<Redirect
-        to={'/error/404'}
-    />)
+
+    useEffect(() => {
+        getComponent()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
+    return compontent
 }
 
-export default Auth
+export default connect(
+    ({ userReducer }) => (
+        {
+            menuList: userReducer.menuList,
+            token: userReducer.token
+        }
+    ),
+    { reqUserMenu },
+)(withRouter(Auth))

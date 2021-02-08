@@ -1,42 +1,23 @@
 import React from 'react';
-
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Auth from '../auth'
+import { connect } from 'react-redux'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { businessRouteList } from '../../router/utils'
-// import userAuth from '../../store/user.js'
-import { getToken } from '../../utils/auth'
+
 function renderRoutes(route) {
     const { component: Component } = route
-    // if (hasMenuAuth(route)) {
-        return (
-            <Route
-                key={route.path}
-                path={route.path}
-                render={props => {
-                    return (
-                        <Auth {...props}>
-                            <Component {...props}></Component>
-                        </Auth>
-                    )
-                }
-                }
-            >
-
-            </Route>
-        )
-    // }
-    // return null
+    return (
+        <Route
+            key={route.path}
+            path={route.path}
+            render={props => {
+                document.title = route.meta.title
+                return (
+                    <Component {...props}></Component>
+                )
+            }}
+        />
+    )
 }
-
-// function hasMenuAuth(route) {
-//     let role = getToken()
-//     if (!role) {
-//         console.log(123)
-//     }
-//     console.log(role)
-//     if (userAuth[role].permission.includes(route.path)) return true
-//     return false
-// }
 
 function AppMain(props) {
     return (
@@ -44,6 +25,7 @@ function AppMain(props) {
             <Switch>
                 {
                     businessRouteList.map(route => {
+                        if (props.menuList.includes(route.path)) return null
                         return renderRoutes(route)
                     })
                 }
@@ -54,4 +36,11 @@ function AppMain(props) {
     );
 }
 
-export default AppMain;
+export default connect(
+    ({ userReducer }) => (
+        {
+            menuList: userReducer.menuList,
+        }
+    ),
+    { },
+) (AppMain);
