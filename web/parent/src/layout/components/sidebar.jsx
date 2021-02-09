@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -8,16 +8,24 @@ const { SubMenu, Item } = Menu;
 
 function SideBar(props) {
     const pathname = props.location.pathname
-    const { collapsed } = props
     //获取菜单列表 
 
+    const { menuList, sidebar } = useSelector(({ userReducer, appReducer }) => (
+        {
+            menuList: userReducer.menuList,
+            sidebar: appReducer.sidebar
+        }
+    ))
     function renderMenu(routeList) {
         return routeList.map(route => {
-            if (!props.menuList.includes(route.path)) return null
-            if (route.children) {
+            if (!menuList.includes(route.path)) return null
+            if (route.children && route.children.length > 0) {
                 // 单个菜单扁平化处理
                 if (hasOneShowingChild(route.children)) {
-                    return renderMenu(route.children)
+                    if (route.children[0].children) {
+                        return renderMenu([{...route, ...route.children[0]}])
+                    }
+                    return renderMenu([{...route, ...route.children[0], children: []}])
                 }
                 return (
                     <SubMenu key={route.path} icon={route.icon ? <route.icon /> : null} title={route.meta.title}>
@@ -61,7 +69,7 @@ function SideBar(props) {
                 selectedKeys={[pathname]}
                 mode="inline"
                 theme="dark"
-                inlineCollapsed={collapsed}
+                inlineCollapsed={sidebar.collapsed}
             >
                 {renderMenu(businessMenuList)}
             </Menu>
@@ -69,12 +77,4 @@ function SideBar(props) {
     );
 }
 
-export default connect(
-    ({ userReducer, appReducer }) => (
-        {
-            menuList: userReducer.menuList,
-            collapsed: appReducer.collapsed
-        }
-    ),
-    { },
-) (withRouter(SideBar));
+export default withRouter(SideBar)

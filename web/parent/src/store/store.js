@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 import userReducer from './module/user'
 import appReducer from './module/app'
+import testReducer from './module/test';
 
 const reducers = combineReducers({
     userReducer,
-    appReducer
+    appReducer,
+    testReducer
 })
 
 const middleware = [thunk]

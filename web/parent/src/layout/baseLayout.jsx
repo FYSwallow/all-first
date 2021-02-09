@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { AppMain, NavHeader, SideBar } from './components/index'
 import RightPanel from '../components/rightPanel/index'
 import Auth from './auth'
@@ -14,7 +14,15 @@ function isMobile() {
 }
 
 function BaseLayout(props) {
-    const { device, collapsed, withoutAnimation, toggleDevice, closeSideBar } = props
+    const { device, sidebar } = useSelector(({ appReducer }) => (
+        {
+            device: appReducer.device,
+            sidebar: appReducer.sidebar,
+        }
+    ))
+    const { collapsed, withoutAnimation } = sidebar
+    const dispatch = useDispatch()
+
     // 窗口大小缩放
     useEffect(() => {
         if (isMobile() && device !== 'mobile') {
@@ -25,28 +33,36 @@ function BaseLayout(props) {
         return () => {
             window.removeEventListener('resize', handleResize)
         }
-    })
-    // 窗口缩放
-    const handleResize = () => {
-        toggleDevice({ device: isMobile() ? 'mobile' : 'pc' })
-        if (isMobile()) {
-            closeSideBar({ collapsed: true, withoutAnimation: true })
-        }
-    }
-    // 小屏幕下侧边栏的隐藏与显示
-    const handleChangeSideBar = () => {
-        closeSideBar({ collapsed: true, withoutAnimation: false })
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    const toggleSidebar = () => {
-        closeSideBar({ collapsed: !collapsed, withoutAnimation: false })
-    }
+    // 窗口缩放
+    const handleResize = useCallback(
+        () => {
+            dispatch(toggleDevice({ device: isMobile() ? 'mobile' : 'pc' }))
+            if (isMobile()) {
+                dispatch(closeSideBar({ collapsed: true, withoutAnimation: true }))
+            }
+        },
+        [dispatch]
+    )
+    // 小屏幕下侧边栏的隐藏与显示
+    const handleChangeSideBar = useCallback(
+        () => dispatch(closeSideBar({ collapsed: true, withoutAnimation: false })),
+        [dispatch]
+    )
+
+    const toggleSidebar = useCallback(
+        () => dispatch(closeSideBar({ collapsed: !collapsed, withoutAnimation: false })),
+        [collapsed, dispatch]
+    )
 
     return (
         <Auth {...props}>
             <div className={["app-wrapper", collapsed ? 'hideSidebar' : 'openSidebar', withoutAnimation ? "withoutAnimation" : "", device === 'mobile' ? 'mobile-app' : 'pc-app'].join(' ')}>
                 {device === 'mobile' && !collapsed ? <div className="drawer-bg" onClick={handleChangeSideBar} /> : null}
                 {/* 在h5窗口大小下,始终显示为 */}
+
                 <SideBar />
                 <div className="main-container">
                     <div className='fixed-header'>
@@ -57,15 +73,7 @@ function BaseLayout(props) {
                 <RightPanel />
             </div>
         </Auth>
+
     );
 }
-export default connect(
-    ({ appReducer }) => (
-        {
-            device: appReducer.device,
-            collapsed: appReducer.collapsed,
-            withoutAnimation: appReducer.withoutAnimation
-        }
-    ),
-    { toggleDevice, closeSideBar }
-)(BaseLayout)
+export default BaseLayout

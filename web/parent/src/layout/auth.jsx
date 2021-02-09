@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { reqUserMenu } from '../store/module/user'
 
 function Auth(props) {
-    const { pathname, search } = props.location
     const [compontent, setComponent] = useState(null)
+    const { menuList, token, sidebar, device } = useSelector(({ userReducer, appReducer }) => (
+        {
+            menuList: userReducer.menuList,
+            token: userReducer.token,
+            sidebar: appReducer.sidebar,
+            device: appReducer.device
+        }
+    ))
+    const dispatch = useDispatch()
+
+    const editNum = useCallback(
+        () => dispatch(reqUserMenu(token)),
+        [dispatch, token]
+    )
+
+    const { collapsed, withoutAnimation } = sidebar
+    const { pathname, search } = props.location
 
     async function getComponent() {
         let renderNode = null
-        const role = props.token
-        if (!role) {
+        if (!token) {
             renderNode = (<Redirect
                 to={`/system/login?redirectUrl=${pathname + search}`}
             />)
         } else {
-            const hasPermission = props.menuList && props.menuList.length > 0
+            const hasPermission = menuList && menuList.length > 0
             if (!hasPermission) {
-                props.reqUserMenu(role)
+                editNum()
             }
             renderNode = (<>{props.children}</>)
         }
@@ -27,17 +42,9 @@ function Auth(props) {
     useEffect(() => {
         getComponent()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    
+    }, [collapsed, withoutAnimation, device])
+
     return compontent
 }
 
-export default connect(
-    ({ userReducer }) => (
-        {
-            menuList: userReducer.menuList,
-            token: userReducer.token
-        }
-    ),
-    { reqUserMenu },
-)(withRouter(Auth))
+export default withRouter(Auth)

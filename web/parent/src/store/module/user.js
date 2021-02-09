@@ -1,6 +1,7 @@
 import { getToken } from './../../utils/auth';
 import { privateRoute } from './../../router/config';
 import { setToken } from '../../utils/auth'
+import { businessRouteList } from '../../router/utils'
 
 const SET_TOKEN = "SET_TOKEN" // 设置token
 const SET_MENULIST = "SET_MENULIST" // 设置token
@@ -34,6 +35,9 @@ export const reqUserMenu = (token) => {
         let menuList = []
         if (token) {
             menuList = privateRoute[token].permission
+            businessRouteList.forEach(item => {
+                menuList.push(item.path)
+            })
         }
         dispatch(setMenuList(menuList))
     }

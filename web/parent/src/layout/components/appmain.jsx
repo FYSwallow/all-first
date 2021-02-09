@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { businessRouteList } from '../../router/utils'
+import { businessRouteListTotal } from '../../router/utils'
 
 function renderRoutes(route) {
     const { component: Component } = route
@@ -20,27 +20,26 @@ function renderRoutes(route) {
 }
 
 function AppMain(props) {
+    const { menuList } = useSelector(({ userReducer }) => (
+        {
+            menuList: userReducer.menuList,
+        }
+    ))
     return (
         <div className="app-main" id="subapp-viewport">
             <Switch>
                 {
-                    businessRouteList.map(route => {
-                        if (props.menuList.includes(route.path)) return null
+                    businessRouteListTotal.map(route => {
+                        if (!menuList.includes(route.path)) return null
                         return renderRoutes(route)
                     })
                 }
                 {/* 没有则跳转到404 */}
                 <Redirect from='/' exact to='/dashboard' />
+                <Redirect from='/*' to='/error/404' />
             </Switch>
         </div>
     );
 }
 
-export default connect(
-    ({ userReducer }) => (
-        {
-            menuList: userReducer.menuList,
-        }
-    ),
-    { },
-) (AppMain);
+export default AppMain
