@@ -1,9 +1,11 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Menu, Dropdown } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 
-import {removeToken} from '../../utils/auth'
+import { saveToken, reqUserMenu } from './../../store/module/user';
+import { removeToken } from './../../utils/auth';
 
 function MyDropDown(props) {
     const menu = (
@@ -19,8 +21,10 @@ function MyDropDown(props) {
         </Menu>
     );
     function logOut() {
+        props.saveToken('')
+        props.reqUserMenu()
         removeToken()
-        props.history.replace('/login')   
+        props.history.replace('/system/login')
     }
     return (
         <Dropdown overlay={menu} trigger={['click']}>
@@ -31,4 +35,7 @@ function MyDropDown(props) {
     )
 }
 
-export default withRouter(MyDropDown)
+export default connect(
+    () => ({}),
+    { saveToken, reqUserMenu }
+)(withRouter(MyDropDown))

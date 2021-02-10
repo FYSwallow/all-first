@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 
 // 初始化样式
 import 'normalize.css/normalize.css';
@@ -8,8 +8,11 @@ import 'antd/dist/antd.css';
 import './styles/index.scss'
 import * as serviceWorker from './serviceWorker';
 import App from './app'
+import store from './store/store'
 ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 );
 

@@ -1,7 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Form, Input, Button, Card } from 'antd';
-
-import {setToken} from '../../utils/auth'
+import { reqLogin } from '../../store/module/user'
 
 import './login.scss'
 
@@ -20,13 +20,12 @@ const tailLayout = {
     },
 }
 function Login(props) {
-    const hash = props.location.search.replace('?redirect=', '')
+    const hash = props.location.search.replace('?redirectUrl=', '')
     const onFinish = async (values) => {
-        const { username } = values
-        setToken(username)
-        props.history.replace(hash || '/')
+        props.reqLogin(values)
+        props.history.replace({ pathname: hash || '/' })
     }
-    return (    
+    return (
         <div className="login">
             <Card title="用户登录" className="login-card">
                 <Form
@@ -36,8 +35,9 @@ function Login(props) {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                    initialValues = {{
-                        username: 'admin',
+                    // eslint-disable-next-line react/jsx-no-duplicate-props
+                    initialValues={{
+                        username: '张三',
                         password: '123456',
                     }}
                 >
@@ -51,7 +51,7 @@ function Login(props) {
                             },
                         ]}
                     >
-                        <Input/>
+                        <Input />
                     </Form.Item>
 
                     <Form.Item
@@ -64,7 +64,7 @@ function Login(props) {
                             },
                         ]}
                     >
-                        <Input.Password/>
+                        <Input.Password />
                     </Form.Item>
 
                     <Form.Item {...tailLayout}>
@@ -76,4 +76,7 @@ function Login(props) {
     )
 }
 
-export default Login
+export default connect(
+    () => ({}),
+    { reqLogin }
+)(Login)

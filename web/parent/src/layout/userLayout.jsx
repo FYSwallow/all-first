@@ -1,15 +1,24 @@
 import React from 'react'
 
 import { Switch, Redirect, Route } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import { systemRouteList } from '../router/utils'
-import Component from '../views/login/index'
 
 function UserLayout(props) {
+    const routeMenu = systemRouteList.map((route) => {
+        const { component: Component } = route
+        return <Route
+            path={route.path}
+            key={route.path}
+            render={props => {
+                document.title = route.meta.title
+                return <Component {...props} ></Component>
+            }}
+        ></Route>
+    })
     return (
         <Switch>
-            {renderRoutes(systemRouteList)}
-            <Redirect to="/system/login" component={Component}/>
+            {routeMenu}
+            <Redirect from='/system' exact to="/system/login" />
         </Switch>
     )
 }
