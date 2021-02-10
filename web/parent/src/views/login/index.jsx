@@ -37,7 +37,7 @@ function Login(props) {
                     onFinish={onFinish}
                     // eslint-disable-next-line react/jsx-no-duplicate-props
                     initialValues={{
-                        username: 'admin',
+                        username: '张三',
                         password: '123456',
                     }}
                 >

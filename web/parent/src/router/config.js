@@ -64,6 +64,13 @@ export const routes = [
         ]
     },
     {
+        path: '/404',
+        meta: {
+            title: '404页面'
+        },
+        component: asyncComponent(() => import('../views/error/404'))
+    },
+    {
         path: '/',
         component: Layout,
         meta: {
@@ -77,7 +84,7 @@ export const routes = [
                     auth: 'all'
                 },
                 icon: TableOutlined,
-                component: asyncComponent(() => import('../views/userSetting/index')),
+                component: asyncComponent(() => import('../views/userSetting/user')),
                 children: [
                     {
                         path: '/error/404',
@@ -96,7 +103,7 @@ export const routes = [
                 ]
             },
         ]
-    }
+    },
 ]
 
 export const asyncRoutes = [
@@ -181,18 +188,35 @@ export const asyncRoutes = [
         },
     },
     {
-        path: '/user',
+        path: '/permission',
         meta: {
             title: '权限设置',
         },
         icon: TableOutlined,
-        component: asyncComponent(() => import('../views/userSetting/index')),
+        children: [
+            {
+                path: '/permission/role',
+                meta: {
+                    title: '角色管理',
+                },
+                component: asyncComponent(() => import('../views/userSetting/role')),
+
+            },
+            {
+                path: '/permission/user',
+                meta: {
+                    title: '用户管理',
+                },
+                component: asyncComponent(() => import('../views/userSetting/user')),
+
+            }
+        ],
     },
 ]
 
 export const privateRoute = {
     'admin': {
-        permission:  ["/dashboard", "/nested",'/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/user"]
+        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user"]
     },
     'guest': {
         permission: ["/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/dashboard"]

@@ -9,22 +9,19 @@ function renderRoutes(route) {
         <Route
             key={route.path}
             path={route.path}
+            exact
             render={props => {
                 document.title = route.meta.title
-                return (
-                    <Component {...props}></Component>
-                )
+                return  <Component {...props} ></Component>
             }}
         />
     )
 }
 
 function AppMain(props) {
-    const { menuList } = useSelector(({ userReducer }) => (
-        {
-            menuList: userReducer.menuList,
-        }
-    ))
+    const { menuList } = useSelector(({ userReducer }) => ({
+        menuList: userReducer.menuList,
+    }))
     return (
         <div className="app-main" id="subapp-viewport">
             <Switch>
@@ -36,7 +33,8 @@ function AppMain(props) {
                 }
                 {/* 没有则跳转到404 */}
                 <Redirect from='/' exact to='/dashboard' />
-                <Redirect from='/*' to='/error/404' />
+                <Redirect from='*' exact to='/error/404' />
+
             </Switch>
         </div>
     );

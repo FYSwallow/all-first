@@ -1,5 +1,7 @@
-import { getToken } from './../../utils/auth';
-import { privateRoute } from './../../router/config';
+import { message } from 'antd';
+
+import { getToken } from './../../utils/auth'
+import { userList ,roleList} from '../../config/index'
 import { setToken } from '../../utils/auth'
 import { businessRouteList } from '../../router/utils'
 
@@ -23,9 +25,14 @@ export const setMenuList = (list) => ({ type: SET_MENULIST, data: list })
 export const reqLogin = (user) => {
     const { username } = user
     return async dispatch => {
-        // 实际情况用ajax获取    
-        setToken(username)
-        dispatch(saveToken(username))
+        // 实际情况用ajax获取
+        const user = userList.find((item) => item.name === username)
+        if (!user) {
+            message.error('用户名不存在, 请重新登录');
+            return
+        }    
+        setToken(user.role)
+        dispatch(saveToken(user.role))
     }
 }
 
@@ -34,7 +41,10 @@ export const reqUserMenu = (token) => {
     return async dispatch => {
         let menuList = []
         if (token) {
-            menuList = privateRoute[token].permission
+            const roleInfo = roleList.find((item) => item.role === token)
+            console.log(roleList, roleInfo, token)
+
+            menuList = roleInfo.permission
             businessRouteList.forEach(item => {
                 menuList.push(item.path)
             })

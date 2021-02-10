@@ -1,7 +1,7 @@
 import React from 'react'
 
 // 路由组件
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { layoutRouteList } from './router/utils'
 
 const renderRoutes = (routes) => {
@@ -10,7 +10,10 @@ const renderRoutes = (routes) => {
         return <Route
             path={route.path}
             key={route.path}
-            component={Component}
+            render={props => {
+                document.title = route.meta.title
+                return  <Component {...props} ></Component>
+            }}
         ></Route>
     })
 }
