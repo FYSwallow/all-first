@@ -92,48 +92,41 @@
         }
 
         .navheader {
-            @include fj;
             height: 50px;
-            width: 100%;
             top: 0;
+            left: 0;
             right: 0;
             overflow: hidden;
             background: #fff;
             box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
-            .navheader-left {
-                flex: 1;
-                clear: both;
-                .navIcon {
-                    float: left;
-                    padding: 0 15px;
+            .hamburger-container {
+                float: left;
+                padding: 0 15px;
+                line-height: 50px;
+            }
+
+            .breadcrumb-container {
+                float: left;
+                height: 50px;
+                div {
                     line-height: 50px;
-                }
-                .navlink {
-                    float: left;
-                    height: 50px;
-                    div {
-                        line-height: 50px;
-                    }
                 }
             }
             .navheader-right {
-                flex: 1;
-                clear: both;
-                padding: 0 15px;
-                .avatar {
-                    float: right;
-                    width: 50px;
+                float: right;
+                .right-menu-item {
                     height: 50px;
+                    line-height: 50px;
+                    margin: 0 5px;
+                    display: inline-block;
+                }
+                .avatar {
+                    width: 50px;
                     img {
                         width: 100%;
                         height: 100%;
                         padding: 10px;
                     }
-                }
-                .user-menu {
-                    float: right;
-                    height: 50px;
-                    line-height: 50px;
                 }
             }
         }

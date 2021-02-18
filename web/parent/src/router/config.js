@@ -1,4 +1,5 @@
 import {
+    BankOutlined,
     PicRightOutlined,
     PieChartOutlined,
     TableOutlined,
@@ -8,7 +9,7 @@ import {
 import Dashboard from '../views/dashboard/index'
 import H5 from '../views/H5/index' // 语义化
 import Drag from '../views/drag/index'
-import asyncComponent from './../components/aysncComponent';
+import asyncComponent from './../components/aysncComponent'
 
 import UserLayout from '../layout/userLayout'
 import Layout from '../layout/baseLayout'
@@ -21,6 +22,7 @@ export const routes = [
         meta: {
             title: '系统路由',
         },
+        redirect: '/system/login',
         children: [
             {
                 title: '登录',
@@ -76,6 +78,7 @@ export const routes = [
         meta: {
             title: '主页',
         },
+        redirect: '/dashboard',
         children: [
             {
                 path: '/error',
@@ -84,6 +87,7 @@ export const routes = [
                     auth: 'all'
                 },
                 icon: TableOutlined,
+                redirect: '/error/404',
                 component: asyncComponent(() => import('../views/userSetting/user')),
                 children: [
                     {
@@ -109,7 +113,7 @@ export const routes = [
 export const asyncRoutes = [
     {
         path: '/dashboard',
-        icon: PieChartOutlined,
+        icon: BankOutlined,
         component: Dashboard,
         meta: {
             title: '首页',
@@ -122,6 +126,7 @@ export const asyncRoutes = [
         meta: {
             title: '嵌套',
         },
+        redirect: '/nested/menu1',
         children: [
             {
                 path: '/nested/menu1',
@@ -129,6 +134,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '层级1',
                 },
+                redirect: '/nested/menu1/menu1-1',
                 children: [
                     {
                         path: '/nested/menu1/menu1-1',
@@ -136,6 +142,7 @@ export const asyncRoutes = [
                         meta: {
                             title: '层级1-1',
                         },
+                        redirect: '/nested/menu1/menu1-1/menu1-1-1',
                         children: [
                             {
                                 path: '/nested/menu1/menu1-1/menu1-1-1',
@@ -192,6 +199,7 @@ export const asyncRoutes = [
         meta: {
             title: '权限设置',
         },
+        redirect: '/permission/role',
         icon: TableOutlined,
         children: [
             {
@@ -212,13 +220,11 @@ export const asyncRoutes = [
             }
         ],
     },
-]
-
-export const privateRoute = {
-    'admin': {
-        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user"]
+    {
+        path: 'https://github.com/PanJiaChen/vue-element-admin',
+        icon: DragOutlined,
+        meta: {
+            title: '超链接'
+        }
     },
-    'guest': {
-        permission: ["/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/dashboard"]
-    }
-}
+]

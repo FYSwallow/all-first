@@ -39,7 +39,7 @@ export const roleList = [
         phone: 13288487566,
         createTime: Date.now() - 3600000,
         description: '管理员',
-        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user"]
+        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user", "https://github.com/PanJiaChen/vue-element-admin"]
     },
     {
         key: '2',
@@ -47,7 +47,7 @@ export const roleList = [
         phone: 13388487566,
         createTime: Date.now() - 3600000,
         description: '普通用户',
-        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user"]
+        permission: ["/dashboard", "/nested", '/h5', "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/drag", "/permission", "/permission/role", "/permission/user", "https://github.com/PanJiaChen/vue-element-admin"]
 
     },
     {
@@ -56,6 +56,6 @@ export const roleList = [
         phone: 15265445933,
         createTime: Date.now() - 3600000,
         description: '游客预览',
-        permission: ["/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/dashboard"]
+        permission: ["/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/dashboard", "https://github.com/PanJiaChen/vue-element-admin"]
     },
 ]

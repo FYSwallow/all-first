@@ -58,7 +58,7 @@ function BaseLayout(props) {
     )
 
     return (
-        <Auth {...props}>
+        <Auth>
             <div className={["app-wrapper", collapsed ? 'hideSidebar' : 'openSidebar', withoutAnimation ? "withoutAnimation" : "", device === 'mobile' ? 'mobile-app' : 'pc-app'].join(' ')}>
                 {device === 'mobile' && !collapsed ? <div className="drawer-bg" onClick={handleChangeSideBar} /> : null}
                 {/* 在h5窗口大小下,始终显示为 */}

@@ -4,6 +4,7 @@ import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 
 import { businessMenuList } from '../../router/utils'
+import { isExternal } from '../../utils/validate'
 const { SubMenu, Item } = Menu;
 
 function SideBar(props) {
@@ -23,9 +24,9 @@ function SideBar(props) {
                 // 单个菜单扁平化处理
                 if (hasOneShowingChild(route.children)) {
                     if (route.children[0].children) {
-                        return renderMenu([{...route, ...route.children[0]}])
+                        return renderMenu([{ ...route, ...route.children[0] }])
                     }
-                    return renderMenu([{...route, ...route.children[0], children: []}])
+                    return renderMenu([{ ...route, ...route.children[0], children: [] }])
                 }
                 return (
                     <SubMenu key={route.path} icon={route.icon ? <route.icon /> : null} title={route.meta.title}>
@@ -35,7 +36,12 @@ function SideBar(props) {
             }
             return (
                 <Item key={route.path} icon={route.icon ? <route.icon /> : null} onClick={props.hide}>
-                    <Link to={route.path}>{route.meta.title}</Link>
+                    {isExternal(route.path) ?
+                        // eslint-disable-next-line jsx-a11y/anchor-has-content
+                        // eslint-disable-next-line react/jsx-no-target-blank
+                        <a href={route.path} target='_blank'>{route.meta.title}</a>
+                        : <Link to={route.path}>{route.meta.title}</Link>
+                    }
                 </Item>
             )
         })

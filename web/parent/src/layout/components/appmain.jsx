@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import FancyRoute from './fancyRoute'
 import { businessRouteListTotal } from '../../router/utils'
 
 function renderRoutes(route) {
@@ -9,10 +10,13 @@ function renderRoutes(route) {
         <Route
             key={route.path}
             path={route.path}
-            exact
+            exact={route.path !== '*'}
             render={props => {
                 document.title = route.meta.title
-                return  <Component {...props} ></Component>
+                if (route.redirect) {
+                    return <Redirect to={route.redirect} />
+                }
+                return <FancyRoute key={route.path}><Component {...props} ></Component></FancyRoute>
             }}
         />
     )
@@ -32,10 +36,9 @@ function AppMain(props) {
                     })
                 }
                 {/* 没有则跳转到404 */}
-                <Redirect from='/' exact to='/dashboard' />
-                <Redirect from='*' exact to='/error/404' />
-
+                <Redirect from='*' to='/error/404' />
             </Switch>
+
         </div>
     );
 }

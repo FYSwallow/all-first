@@ -42,8 +42,6 @@ export const reqUserMenu = (token) => {
         let menuList = []
         if (token) {
             const roleInfo = roleList.find((item) => item.role === token)
-            console.log(roleList, roleInfo, token)
-
             menuList = roleInfo.permission
             businessRouteList.forEach(item => {
                 menuList.push(item.path)

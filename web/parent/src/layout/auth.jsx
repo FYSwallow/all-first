@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reqUserMenu } from '../store/module/user'
 
@@ -21,9 +21,9 @@ function Auth(props) {
     )
 
     const { collapsed, withoutAnimation } = sidebar
-    const { pathname, search } = props.location
+    const { pathname, search } = useLocation()
 
-    async function getComponent() {
+    function getComponent() {
         let renderNode = null
         if (!token) {
             renderNode = (<Redirect
@@ -47,4 +47,4 @@ function Auth(props) {
     return compontent
 }
 
-export default withRouter(Auth)
+export default Auth

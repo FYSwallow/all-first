@@ -8,11 +8,7 @@ import { routes, asyncRoutes } from './config'
 export function flatterRoute(routerList, deep, auth) {
     const result = []
     routerList.forEach((item, index) => {
-        result.push({
-            ...item,
-            auth: typeof item.auth !== 'undefined' ? item.auth : auth
-        })
-
+        result.push(item)
         if (item.children && deep) {
             result.push(...flatterRoute(item.children, deep, auth))
         }
@@ -35,8 +31,8 @@ function getLayoutRoutelist() {
  * @returns
  */
 function getSystemRoutelist() {
-    const route = routes.find((item) => item.path === '/system')
-    return flatterRoute(route.children, true, false)
+    const route = routes.filter((item) => item.path === '/system')
+    return flatterRoute(route, true, false)
 }
 
 /**
@@ -44,8 +40,8 @@ function getSystemRoutelist() {
  * @returns
  */
 function getBusinessRoutelist() {
-    const route = routes.find((item) => item.path === '/')
-    return flatterRoute(route.children, true, false)
+    const route = routes.filter((item) => item.path === '/')
+    return flatterRoute(route, true, false)
 }
 
 /**
@@ -61,7 +57,7 @@ function getAsyncBusinessRoutelist() {
 
 function getTestRouteList() {
     const route = routes.find((item) => item.path === '/test')
-    return flatterRoute(route.children, false, false)
+    return flatterRoute(route.children, true, false)
 }
 
 
