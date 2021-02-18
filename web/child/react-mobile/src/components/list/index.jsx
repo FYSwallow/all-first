@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import './style/index.scss'
 
-function List (props) {
+function List(props) {
     const {
         style,
         className,

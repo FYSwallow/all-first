@@ -5,7 +5,7 @@ module.exports = {
     },
     extends: [
         'plugin:react/recommended',
-        'standard'
+        'standard',
     ],
     parserOptions: {
         ecmaFeatures: {
@@ -15,12 +15,12 @@ module.exports = {
         sourceType: 'module'
     },
     plugins: [
-        'react'
+        'react',
     ],
     rules: {
         'no-tabs': 'off',
         indent: ['error', 4],
         'react/prop-types': 0, // 防止在react组件定义中缺少props验证
-        'multiline-ternary': ['error', 'never']
+        "space-before-function-paren": 0, //函数（）前不加空格
     }
 }
