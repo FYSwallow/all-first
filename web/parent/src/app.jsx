@@ -1,6 +1,4 @@
 import React from 'react'
-
-// 路由组件
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { layoutRouteList } from './router/utils'
 

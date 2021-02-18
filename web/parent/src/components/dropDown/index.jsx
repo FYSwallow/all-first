@@ -6,6 +6,7 @@ import { CaretDownOutlined } from '@ant-design/icons';
 
 import { saveToken, reqUserMenu } from './../../store/module/user';
 import { removeToken } from './../../utils/auth';
+import avatar from '../../assets/images/头像1.png'
 
 function MyDropDown(props) {
     const menu = (
@@ -27,8 +28,9 @@ function MyDropDown(props) {
         props.history.replace('/system/login')
     }
     return (
-        <Dropdown overlay={menu} trigger={['click']}>
+        <Dropdown overlay={menu}>
             <span className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                <img src={avatar} alt="" /> 
                 <CaretDownOutlined />
             </span>
         </Dropdown>
