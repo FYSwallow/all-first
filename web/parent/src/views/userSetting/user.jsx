@@ -13,12 +13,13 @@ import { treeMenuList } from '../../router/utils'
 
 
 const FormSizeDemo = () => {
-    const onSelect = (selectedKeys) => {
+    const onCheck = (selectedKeys) => {
         console.log(selectedKeys);
     }
 
-    const onCheck = (checkedKeys) => {
+    const onSelect = (checkedKeys) => {
         flatterMenuList(checkedKeys)
+        console.log(checkedKeys)
     }
     return (
         <>

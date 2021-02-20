@@ -1,9 +1,9 @@
 import { message } from 'antd';
 
 import { getToken } from './../../utils/auth'
-import { userList ,roleList} from '../../config/index'
+import { userList, roleList } from '../../config/index'
 import { setToken } from '../../utils/auth'
-import { businessRouteList } from '../../router/utils'
+import { businessRouteList, asyncBusinessRoutelist, flatterMenuList } from '../../router/utils'
 
 const SET_TOKEN = "SET_TOKEN" // 设置token
 const SET_MENULIST = "SET_MENULIST" // 设置token
@@ -30,7 +30,7 @@ export const reqLogin = (user) => {
         if (!user) {
             message.error('用户名不存在, 请重新登录');
             return
-        }    
+        }
         setToken(user.role)
         dispatch(saveToken(user.role))
     }
@@ -42,11 +42,11 @@ export const reqUserMenu = (token) => {
         let menuList = []
         if (token) {
             const roleInfo = roleList.find((item) => item.role === token)
-            menuList = roleInfo.permission
-            businessRouteList.forEach(item => {
-                menuList.push(item.path)
-            })
+            menuList = flatterMenuList(roleInfo.permission)
+            businessRouteList.forEach(item => menuList.push(item.path))
         }
+        console.log(menuList)
+
         dispatch(setMenuList(menuList))
     }
 }
@@ -57,6 +57,7 @@ const userReducer = (state = initUserInfo, action) => {
         case SET_TOKEN:
             return Object.assign(state, { token: action.data })
         case SET_MENULIST:
+            console.log(action.data)
             return Object.assign(state, { menuList: action.data })
         default:
             return { ...state }

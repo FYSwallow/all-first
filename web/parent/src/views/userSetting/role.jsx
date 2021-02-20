@@ -18,7 +18,7 @@ const FormSizeDemo = (props) => {
     }
 
     const onCheck = (checkedKeys) => {
-        flatterMenuList(checkedKeys)
+        // flatterMenuList(checkedKeys)
     }
     return (
         <>
@@ -49,31 +49,6 @@ const FormSizeDemo = (props) => {
             </Form>
         </>
     );
-}
-
-function flatterMenuList(list) {
-    const resultItem = []
-    list.forEach(item => {
-        const itemArr = item.split('/')
-        if (itemArr.length <= 2) {
-            if (resultItem.includes(item)) return
-            resultItem.push(item)
-        } else {
-            let preVal
-            itemArr.forEach((val, index) => {
-                if (index > 1) {
-                    preVal = '/' + itemArr[index - 1] + '/' + val
-                } else if (index === 1) {
-                    preVal = '/' + val
-                } else {
-                    return
-                }
-                if (resultItem.includes(preVal)) return
-                resultItem.push(preVal)
-            })
-        }
-    });
-
 }
 
 function UserSetting(props) {

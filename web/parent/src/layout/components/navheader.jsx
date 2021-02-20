@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import {
-    SearchOutlined,
     FullscreenOutlined,
     FullscreenExitOutlined,
     MenuUnfoldOutlined,
@@ -11,6 +10,7 @@ import {
 
 import MyBreadcrumb from '../../components/Breadcrumb/index'
 import MyDropDown from '../../components/dropDown/index'
+import HeaderSearch from '../../components/search/index.jsx'
 import avatar from '../../assets/images/头像1.png'
 
 function NavHeader(props) {
@@ -29,7 +29,7 @@ function NavHeader(props) {
                 {
                     device === 'mobile' ? null : (
                         <>
-                            <SearchOutlined className='right-menu-item'></SearchOutlined>
+                            <HeaderSearch className='right-menu-item'/>
                             <FullscreenOutlined className='right-menu-item'></FullscreenOutlined>
                             <FullscreenExitOutlined className='right-menu-item'></FullscreenExitOutlined>
                             <FontSizeOutlined className='right-menu-item'></FontSizeOutlined>

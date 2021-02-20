@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Breadcrumb } from 'antd';
 import { businessRouteListTotal } from '../../router/utils'
 
 function MyBreadcrumb(props) {
-    const history = useHistory()
     const { pathname } = useLocation()
     // 当前路由栈信息
     const [currentRoute, setCurrentRoute] = useState([])
-
     useEffect(() => {
         // 获取当前路由信息
         function getCurrentLocation() {

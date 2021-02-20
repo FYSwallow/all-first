@@ -84,7 +84,6 @@ export const routes = [
                 path: '/error',
                 meta: {
                     title: '异常页面',
-                    auth: 'all'
                 },
                 icon: TableOutlined,
                 redirect: '/error/404',
@@ -95,17 +94,17 @@ export const routes = [
                         meta: {
                             title: '404页面'
                         },
-                        component: asyncComponent(() => import('../views/error/404'))
+                        component: asyncComponent(() => import('../views/error/404')),
                     },
                     {
                         path: '/error/405',
                         meta: {
                             title: '405页面'
                         },
-                        component: asyncComponent(() => import('../views/error/404'))
+                        component: asyncComponent(() => import('../views/error/404')),
                     }
                 ]
-            },
+            }
         ]
     },
 ]
@@ -143,6 +142,7 @@ export const asyncRoutes = [
                             title: '层级1-1',
                         },
                         redirect: '/nested/menu1/menu1-1/menu1-1-1',
+
                         children: [
                             {
                                 path: '/nested/menu1/menu1-1/menu1-1-1',
@@ -150,10 +150,12 @@ export const asyncRoutes = [
                                 meta: {
                                     title: '层级1-1-1',
                                 },
+
                             },
                             {
                                 path: '/nested/menu1/menu1-1/menu1-1-2',
                                 component: Dashboard,
+
                                 meta: {
                                     title: '层级1-1-2',
                                 },
@@ -166,6 +168,7 @@ export const asyncRoutes = [
                         meta: {
                             title: '层级1-2',
                         },
+
                     }
                 ]
             },
@@ -216,7 +219,6 @@ export const asyncRoutes = [
                     title: '用户管理',
                 },
                 component: asyncComponent(() => import('../views/userSetting/user')),
-
             }
         ],
     },
@@ -225,6 +227,6 @@ export const asyncRoutes = [
         icon: DragOutlined,
         meta: {
             title: '超链接'
-        }
+        },
     },
 ]
