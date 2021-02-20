@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 
 import MyBreadcrumb from '../../components/Breadcrumb/index'
+import ScreenFull from '../../components/screenfull/index'
 import MyDropDown from '../../components/dropDown/index'
 import HeaderSearch from '../../components/search/index.jsx'
 import avatar from '../../assets/images/头像1.png'
@@ -32,15 +33,13 @@ function NavHeader(props) {
                             <HeaderSearch className='right-menu-item'/>
                             <FullscreenOutlined className='right-menu-item'></FullscreenOutlined>
                             <FullscreenExitOutlined className='right-menu-item'></FullscreenExitOutlined>
+                            <ScreenFull/>
                             <FontSizeOutlined className='right-menu-item'></FontSizeOutlined>
                         </>
                     )
                 }
-                <div className="avatar right-menu-item">
-                    <img src={avatar} alt="" />
-                </div>
-                <div className="user-menu right-menu-item">
-                    <MyDropDown />
+                <div className="dropdown-container">
+                    <MyDropDown/>
                 </div>
             </div>
         </div>

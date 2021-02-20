@@ -102,7 +102,9 @@
             .hamburger-container {
                 float: left;
                 padding: 0 15px;
+                font-size: 20px;
                 line-height: 50px;
+                font-weight: 600;
             }
 
             .breadcrumb-container {
@@ -118,14 +120,30 @@
                     height: 50px;
                     line-height: 50px;
                     margin: 0 5px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    cursor: pointer;
                     display: inline-block;
                 }
-                .avatar {
+                .dropdown-container {
+                    position: relative;
                     width: 50px;
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        padding: 10px;
+                    display: inline-block;
+                    margin-right: 20px;
+                    
+                    .ant-dropdown-link {
+                        display: inline-block;
+                        padding: 5px;
+                        img {
+                            border-radius: 10px 10px;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .anticon-caret-down {
+                        position: absolute;
+                        right: -10px;
+                        bottom: 10px;
                     }
                 }
             }
