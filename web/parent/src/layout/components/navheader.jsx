@@ -8,11 +8,11 @@ import {
     FontSizeOutlined
 } from '@ant-design/icons';
 
-import MyBreadcrumb from '../../components/Breadcrumb/index'
-import ScreenFull from '../../components/screenfull/index'
-import MyDropDown from '../../components/dropDown/index'
-import HeaderSearch from '../../components/search/index.jsx'
-import avatar from '../../assets/images/头像1.png'
+import MyBreadcrumb from '@/components/Breadcrumb/index'
+import ScreenFull from '@/components/screenfull/index'
+import MyDropDown from '@/components/dropDown/index'
+import HeaderSearch from '@/components/search/index.jsx'
+import avatar from '@/assets/images/头像1.png'
 
 function NavHeader(props) {
     const { sidebar, device } = useSelector(({ appReducer }) => ({ sidebar: appReducer.sidebar, device: appReducer.device }))
@@ -31,9 +31,7 @@ function NavHeader(props) {
                     device === 'mobile' ? null : (
                         <>
                             <HeaderSearch className='right-menu-item'/>
-                            <FullscreenOutlined className='right-menu-item'></FullscreenOutlined>
-                            <FullscreenExitOutlined className='right-menu-item'></FullscreenExitOutlined>
-                            <ScreenFull/>
+                            <ScreenFull className='right-menu-item'/>
                             <FontSizeOutlined className='right-menu-item'></FontSizeOutlined>
                         </>
                     )
