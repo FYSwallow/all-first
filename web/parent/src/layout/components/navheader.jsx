@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import {
-    FullscreenOutlined,
-    FullscreenExitOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     FontSizeOutlined
@@ -14,6 +12,7 @@ import MyDropDown from '../../components/dropDown/index'
 import HeaderSearch from '../../components/search/index.jsx'
 import avatar from '../../assets/images/头像1.png'
 
+console.log(window)
 function NavHeader(props) {
     const { sidebar, device } = useSelector(({ appReducer }) => ({ sidebar: appReducer.sidebar, device: appReducer.device }))
     return (
@@ -31,8 +30,6 @@ function NavHeader(props) {
                     device === 'mobile' ? null : (
                         <>
                             <HeaderSearch className='right-menu-item'/>
-                            <FullscreenOutlined className='right-menu-item'></FullscreenOutlined>
-                            <FullscreenExitOutlined className='right-menu-item'></FullscreenExitOutlined>
                             <ScreenFull/>
                             <FontSizeOutlined className='right-menu-item'></FontSizeOutlined>
                         </>
