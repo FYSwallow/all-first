@@ -1,8 +1,0 @@
-@import './mixin.scss';
-@import './theme.scss';
-
-.home-container {
-    @include wh(100vw, 100vh);
-    overflow: hidden;
-    background-color: $rootbg;
-}
