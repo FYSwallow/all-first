@@ -6,11 +6,11 @@ import {
     FontSizeOutlined
 } from '@ant-design/icons';
 
-import MyBreadcrumb from '../../components/Breadcrumb/index'
-import ScreenFull from '../../components/screenfull/index'
-import MyDropDown from '../../components/dropDown/index'
-import HeaderSearch from '../../components/search/index.jsx'
-import avatar from '../../assets/images/头像1.png'
+import MyBreadcrumb from '@/components/Breadcrumb/index'
+import ScreenFull from '@/components/screenfull/index'
+import MyDropDown from '@/components/dropDown/index'
+import HeaderSearch from '@/components/search/index.jsx'
+import avatar from '@/assets/images/头像1.png'
 
 console.log(window)
 function NavHeader(props) {
@@ -30,7 +30,7 @@ function NavHeader(props) {
                     device === 'mobile' ? null : (
                         <>
                             <HeaderSearch className='right-menu-item'/>
-                            <ScreenFull/>
+                            <ScreenFull className='right-menu-item'/>
                             <FontSizeOutlined className='right-menu-item'></FontSizeOutlined>
                         </>
                     )
