@@ -1,19 +1,25 @@
 import {
-    inputEditProp,
-    selectEditProp,
+    inputRadioEditProp,
+    inputCheckEditProp,
+    inputSelectEditProp,
     textareaEditProp
 } from '../config/formEditItem'
 
 export const leftNavConfig = [
     {
-        type: 'input',
+        type: 'inputRadio',
         title: '单选题',
-        defaultProps: inputEditProp
+        defaultProps: inputRadioEditProp
     },
     {
-        type: 'select',
+        type: 'inputCheck',
         title: '多选题',
-        defaultProps: selectEditProp
+        defaultProps: inputCheckEditProp
+    },
+    {
+        type: 'inputSelect',
+        title: '下拉题',
+        defaultProps: inputSelectEditProp
     },
     {
         type: 'texarea',

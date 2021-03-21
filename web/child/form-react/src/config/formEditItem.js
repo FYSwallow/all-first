@@ -1,14 +1,13 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react'
 
 const InputEdit = lazy(()=> import('../components/edit/inputEdit'))
-const SelectEdit = lazy(()=> import('../components/edit/selectEdit'))
 const TextareaEdit = lazy(()=> import('../components/edit/textareaEdit'))
 
 const InputView = lazy(()=> import('../components/preview/inputview'))
 const SelectView = lazy(()=> import('../components/preview/selectview'))
 const TextareaView = lazy(()=> import('../components/preview/textareaview'))
 
-export const inputEditProp = {
+export const inputBaseEditProp = {
     type: 'input',
     title: '请选择一个选项',
     content: [
@@ -18,16 +17,10 @@ export const inputEditProp = {
         { label: 'd', value: "选项4" },
     ]
 }
-export const selectEditProp = {
-    type: 'select',
-    title: '请选择多个选项',
-    content: [
-        { option: 'a', value: "选项1" },
-        { option: 'b', value: "选项2" },
-        { option: 'c', value: "选项3" },
-        { option: 'd', value: "选项4" },
-    ]
-}
+export const inputRadioEditProp = {...inputBaseEditProp, type: 'inputRadio'}
+export const inputSelectEditProp = {...inputBaseEditProp, type: 'inputSelect'}
+export const inputCheckEditProp = {...inputBaseEditProp, type: 'inputCheck'}
+
 export const textareaEditProp = {
     type: 'textarea',
     title: '请选择一个选项',
@@ -35,8 +28,9 @@ export const textareaEditProp = {
 }
 
 export const componentEditMap = {
-    input: InputEdit,
-    select: SelectEdit,
+    inputRadio: InputEdit,
+    inputSelect: InputEdit,
+    inputCheck: InputEdit,
     textarea: TextareaEdit
 }
 export const componentViewMap = {

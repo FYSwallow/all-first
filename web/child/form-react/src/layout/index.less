@@ -1,0 +1,107 @@
+.input-hover {
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.wh(@width, @height) {
+  width: @width;
+  height: @height;
+}
+.fh(@size, @lh) {
+  font-size: @size;
+  line-height: @lh;
+}
+.flex() {
+  display: flex;
+}
+.triangle-shape() {
+  border-top: 10px solid #eee;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+.template-nav-list {
+  padding: 10px;
+  .template-nav-item {
+    float: left;
+    margin: 0 10px 10px 0;
+    width: calc(50% - 10px);
+    text-align: center;
+    border: 2px solid #ccc;
+    &:hover {
+        border-color: #2672ff;
+    }
+  }
+}
+
+.question-title {
+  .question-title-view {
+    margin: 0;
+    padding: 10px;
+    .fh(24px, 24px);
+    .input-hover();
+  }
+  .question-title-input {
+    .fh(24px, 24px);
+  }
+}
+
+.question-content {
+  .question-item {
+    padding: 0 10px;
+    .input-edit-warpper {
+      padding: 10px;
+    }
+    .input-edit-item {
+      float: left;
+      padding: 0 10px 10px 20px;
+      width: 100%;
+      .radio-shape {
+        .wh(18px, 18px);
+        border-radius: 50%;
+        border: 1px solid #ccc;
+      }
+      .check-shape {
+        .wh(18px, 18px);
+        border: 1px solid #ccc;
+      }
+      .select-shape {
+        width: 0;
+        height: 0;
+        .triangle-shape();
+        transform: translateY(5px);
+      }
+    }
+    .item-colls-2 {
+      width: 50%;
+    }
+    .question-item-title {
+      .flex();
+      .fh(20px, 20px);
+      span {
+        display: inline-block;
+        line-height: 30px;
+      }
+      .edit-title-input {
+        flex: 1;
+        outline: none;
+        width: 100%;
+        border: 1px solid transparent;
+        &:hover {
+          background-color: #f4f4f4;
+          border: 1px dashed #eee;
+        }
+      }
+    }
+  }
+}
+
+.clearfix:after {
+  /*伪元素是行内元素 正常浏览器清除浮动方法*/
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
