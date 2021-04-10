@@ -7,6 +7,7 @@ const style = {
     margin: '0.5rem',
 };
 export const SourceBox = ({ color, children }) => {
+    // 参数一时collect返回的方法， 参数二返回ref
     const [{ isDragging }, drag] = useDrag({
         item: { type: `${color}` },
         collect: (monitor) => ({
