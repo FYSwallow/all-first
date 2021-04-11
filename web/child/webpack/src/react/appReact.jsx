@@ -1,8 +1,9 @@
 import React from 'react'
+import {test} from '../common/main.js'
 
 export default function App() {
     console.log(123)
-    console.log()
+    test()
     return (
         <div>123</div>
     )

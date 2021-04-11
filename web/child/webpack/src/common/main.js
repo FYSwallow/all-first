@@ -1,5 +1,5 @@
-function test() {
+export const test = () => {
     console.log('你好啊')
 }
-test()
-console.log(window.$)
+// test()
+// console.log(window.$)
