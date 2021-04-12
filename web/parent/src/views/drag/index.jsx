@@ -3,7 +3,7 @@ import React from 'react'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 
-import {Container} from './container'
+import Container from './components/Container'
 
 export default function Drag(props) {
     return (

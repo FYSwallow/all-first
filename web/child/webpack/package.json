@@ -1,48 +1,60 @@
 {
-  "name": "first-webpack",
+  "name": "propject",
   "version": "1.0.0",
-  "description": "自己动手建一个webpack项目",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config config/webpack.config.js",
-    "dev": "webpack-dev-server --config config/webpack.config.js --open"
+    "start": "npm run dev",
+    "build": "webpack --config build/webpack.prod.js",
+    "dev": "webpack-dev-server --config build/webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "css-loader": "^5.0.1",
-    "less": "^3.13.0",
-    "less-loader": "^7.1.0",
-    "style-loader": "^2.0.0"
-  },
+  "browserslist": [
+    "last 5 version"
+  ],
   "devDependencies": {
-    "autoprefixer": "^10.1.0",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@webpack-cli/serve": "^1.3.1",
+    "autoprefixer": "^10.2.5",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^7.0.0",
-    "css-loader": "^5.0.1",
+    "copy-webpack-plugin": "^6.4.1",
+    "css-loader": "^5.2.0",
+    "eslint": "^7.23.0",
+    "eslint-loader": "^4.0.2",
+    "expose-loader": "^1.0.3",
     "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^4.5.0",
-    "less": "^3.13.0",
-    "less-loader": "^7.1.0",
-    "mini-css-extract-plugin": "^1.3.3",
-    "node-sass": "^5.0.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "postcss-loader": "^4.1.0",
-    "sass-loader": "^10.1.0",
+    "happypack": "^5.0.1",
+    "html-webpack-plugin": "^4.5.2",
+    "html-withimg-loader": "^0.1.16",
+    "less": "^3.13.1",
+    "less-loader": "^7.3.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "postcss-loader": "^4.2.0",
     "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^4.2.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
-    "webpack": "^5.10.3",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.7.2"
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   },
-  "browserslist": [
-    "Firefox > 20",
-    "iOS >= 7",
-    "ie >= 8",
-    "last 5 versions",
-    "> 5%"
-  ]
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "vue": "^2.6.12"
+  }
 }

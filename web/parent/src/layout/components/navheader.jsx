@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import {
-    FullscreenOutlined,
-    FullscreenExitOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     FontSizeOutlined
@@ -13,6 +11,7 @@ import ScreenFull from '../../components/screenfull/index'
 import MyDropDown from '../../components/dropDown/index'
 import HeaderSearch from '../../components/search/index.jsx'
 
+console.log(window)
 function NavHeader(props) {
     const { sidebar, device } = useSelector(({ appReducer }) => ({ sidebar: appReducer.sidebar, device: appReducer.device }))
     return (

@@ -1,0 +1,6 @@
+{
+    "presets": [
+      "@babel/preset-env", //再转成es6语法
+      "@babel/preset-react" //先转react语法
+    ]
+}

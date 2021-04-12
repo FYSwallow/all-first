@@ -9,8 +9,9 @@ const style = {
     textAlign: 'center',
 };
 const TargetBox = ({ onDrop, lastDroppedColor }) => {
+    // 第一个参数是 collect 方法返回的对象，第二个参数是一个 ref 值，赋值给 drop 元素
     const [{ isOver, draggingColor, canDrop }, drop] = useDrop({
-        accept: [Colors.YELLOW, Colors.BLUE],
+        accept: [Colors.YELLOW, Colors.BLUE], //是一个标识， 需要和对应的drag的item type对应， 否则不能感应
         drop(item) {
             onDrop(item.type);
             return undefined;
