@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import FancyRoute from './fancyRoute'
-import { businessRouteListTotal } from '@/router/utils'
+import { businessRouteListTotal } from '../../router/utils'
 
 function renderRoutes(route) {
     const { component: Component } = route
@@ -10,7 +10,7 @@ function renderRoutes(route) {
         <Route
             key={route.path}
             path={route.path}
-            exact={route.path !== '*'}
+            exact
             render={props => {
                 document.title = route.meta.title
                 if (route.redirect) {

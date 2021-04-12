@@ -1,59 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import {
-    Tree,
     Button,
     Table,
     Space,
-    Modal,
-    Form,
-    Input,
-    Select
 } from 'antd'
-import { treeMenuList } from '../../router/utils'
-
-const FormSizeDemo = (props) => {
-    
-    const onSelect = (selectedKeys) => {
-        console.log(selectedKeys);
-    }
-
-    const onCheck = (checkedKeys) => {
-        // flatterMenuList(checkedKeys)
-    }
-    return (
-        <>
-            <Form
-                labelCol={{
-                    span: 4,
-                }}
-                wrapperCol={{
-                    span: 14,
-                }}
-                layout="horizontal"
-            >
-                <Form.Item label="角色名">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="角色介绍">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="编辑权限">
-                    <Tree
-                        checkable
-                        defaultExpandAll
-                        treeData={treeMenuList}
-                        onSelect={onSelect}
-                        onCheck={onCheck}
-                    />
-                </Form.Item>
-            </Form>
-        </>
-    );
-}
 
 function UserSetting(props) {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
     const columns = [
         {
             title: '角色名',
@@ -77,7 +30,7 @@ function UserSetting(props) {
             key: 'permission',
             render: role => (
                 <Space size="middle">
-                    <a  onClick={showModal}>编辑权限</a>
+                    <Link>编辑权限</Link>
                 </Space>
             ),
         },
@@ -93,7 +46,7 @@ function UserSetting(props) {
             ),
         }
     ]
-    
+
     const data = [
         {
             key: '1',
@@ -108,7 +61,7 @@ function UserSetting(props) {
             phone: 13388487566,
             createTime: Date.now() - 3600000,
             description: '普通用户'
-    
+
         },
         {
             key: '3',
@@ -118,27 +71,12 @@ function UserSetting(props) {
             description: '游客预览'
         },
     ]
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
 
 
     return (
         <div className='role-container'>
-            <Button type="primary" onClick={showModal}>新增角色</Button>
+            <Button type="primary"><Link to="/permission/role/add">新增</Link></Button>
             <Table columns={columns} dataSource={data} />
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <FormSizeDemo />
-            </Modal>
-
         </div>
     )
 }

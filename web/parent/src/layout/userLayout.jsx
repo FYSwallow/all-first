@@ -24,6 +24,7 @@ function UserLayout(props) {
             {systemRouteList.map(route => {
                 return renderRoute(route)
             })}
+            <Redirect from='/*' to='/404'/>
         </Switch>
     )
 }

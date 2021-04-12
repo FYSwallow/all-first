@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 
 const WebpackBar = require('webpackbar')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -29,9 +28,9 @@ module.exports = {
             new MiniCssExtractPlugin({// 将css打包成单独的css文件
                 filename: devMode ? '[name].css' : '[name].[hash:5].css',
                 chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
-            }),
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin(),
+            })
+            // new webpack.HotModuleReplacementPlugin(),
+            // new webpack.NamedModulesPlugin(),
         ],
         alias: {
             '@': path.resolve(__dirname, 'src')
