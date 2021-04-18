@@ -1,3 +1,4 @@
+import React from 'react'
 import { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes.js';
@@ -21,7 +22,7 @@ export const Container = ({ hideSourceOnDrag }) => {
             },
         }));
     }, [boxes, setBoxes]);
-    const [, drop] = useDrop(() => ({
+    const [, drop] = useDrop({
         accept: 'card',
         drop(item, monitor) {
             const delta = monitor.getDifferenceFromInitialOffset();
@@ -30,7 +31,7 @@ export const Container = ({ hideSourceOnDrag }) => {
             moveBox(item.id, left, top);
             return undefined;
         },
-    }), [moveBox]);
+    }, [moveBox]);
     return (<div ref={drop} style={styles}>
         {Object.keys(boxes).map((key) => {
             const { left, top, title } = boxes[key];

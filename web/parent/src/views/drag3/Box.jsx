@@ -9,7 +9,7 @@ const style = {
     cursor: 'move',
 };
 const Box = () => {
-    const [, drag] = useDrag(() => ({ type: "box" }));
+    const [, drag] = useDrag({item: {type: "box" }});
     return (<div ref={drag} style={style}>
         Drag me
     </div>);

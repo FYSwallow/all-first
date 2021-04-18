@@ -1,3 +1,4 @@
+import React from 'react'
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from './ItemTypes.js';
 const style = {
@@ -8,12 +9,12 @@ const style = {
     cursor: 'move',
 };
 export const Box = ({ id, left, top, hideSourceOnDrag, children, }) => {
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [{ isDragging }, drag] = useDrag({
         item: { id, left, top, type: 'card',},
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    }), [id, left, top]);
+    }, [id, left, top]);
     if (isDragging && hideSourceOnDrag) {
         return <div ref={drag}/>;
     }

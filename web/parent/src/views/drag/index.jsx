@@ -1,14 +1,15 @@
 import React from 'react'
+import Container from './container'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { DndProvider } from 'react-dnd';
-
-import Container from './components/Container'
-
-export default function Drag(props) {
+function Drag() {
     return (
-        <DndProvider backend={HTML5Backend}>
-            <Container {...props} />
-        </DndProvider>
+        <div className="App">
+            <DndProvider backend={HTML5Backend}>
+                <Container />
+            </DndProvider>
+        </div>
     )
 }
+export default Drag
