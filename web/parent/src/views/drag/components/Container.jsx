@@ -3,7 +3,7 @@
  * overview: 整个拖拽演示界面
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from './Box';
 import List from './List';
 
@@ -19,17 +19,25 @@ const boxs = [
 const Container = () => {
 
     const [cardList, setCardList] = useState([]);
+    const [position, setPosition] = useState(null)
 
     const changeCardList = (list) => {
         setCardList([...list]);
     }
+    useEffect(() => {
+        console.log(cardList)
+    }, [cardList])
+
+    useEffect(() => {
+        
+    }, [position])
 
     return (
         <div>
             {
                 boxs.map((item) => <Box key={ item.id } {...item} cardList={ cardList } changeCardList={ changeCardList } />)
             }
-            <List cardList={ cardList } changeCardList={ changeCardList } />
+            <List cardList={ cardList } changeCardList={ changeCardList } setPosition={setPosition} />
         </div>
     )
 }

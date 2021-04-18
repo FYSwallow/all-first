@@ -19,7 +19,7 @@ const svgStyle = {
 
 const Card = ({ bg, category, index, moveCard, id }) => {
     const ref = useRef(null);
-
+    let position = null
     const [{ isDragging }, drag, dragPreview] = useDrag({
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -30,10 +30,11 @@ const Card = ({ bg, category, index, moveCard, id }) => {
 
     const [, drop] = useDrop({
         accept: 'card',
-        hover(item, monitor) {
+        hover(item, monitor) { //drag 元素进入 drop 元素事件
             if (!ref.current) {
                 return;
             }
+            console.log(item)
             const dragIndex = item.index;
             const hoverIndex = index;
 
@@ -41,7 +42,6 @@ const Card = ({ bg, category, index, moveCard, id }) => {
             if (dragIndex === hoverIndex) {
                 return;
             }
-
             // 确定屏幕上矩形范围
             const hoverBoundingRect = ref.current.getBoundingClientRect();
 
@@ -51,9 +51,9 @@ const Card = ({ bg, category, index, moveCard, id }) => {
             // 确定鼠标位置
             const clientOffset = monitor.getClientOffset();
 
+            
             // 获取距顶部距离
             const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
             /**
              * 只在鼠标越过一半物品高度时执行移动。
              *
@@ -75,6 +75,7 @@ const Card = ({ bg, category, index, moveCard, id }) => {
 
             // 执行 move 回调函数
             moveCard(dragIndex, hoverIndex);
+            // moveCard(dragIndex, hoverIndex, position);
 
             /**
              * 如果拖拽的组件为 Box，则 dragIndex 为 undefined，此时不对 item 的 index 进行修改

@@ -16,6 +16,7 @@ module.exports = merge(base, {
 		// }
     },
     plugins: [
+        new webpack.NamedModulesPlugin(), // 打印哪个模块更新了
         new webpack.HotModuleReplacementPlugin(), // 本地启动热更新
     ]
 })

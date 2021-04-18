@@ -52,7 +52,7 @@ module.exports = {
 					}
 				],
 				include: path.resolve(__dirname, '../src'), //只解析某个文件夹
-				exclude: /node_modules/  //排除某个文件夹
+				exclude: /node_modules/ //排除某个文件夹
 			},
 			{
 				test: /\.vue$/,
@@ -68,8 +68,8 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				use: [
 					{
-						loader: 'HappyPack/loader?id=js', // 使用happypack打包，使用的配置为id=js
-					},
+						loader: 'HappyPack/loader?id=js' // 使用happypack打包，使用的配置为id=js
+					}
 					// {loader: 'babel-loader'}
 				],
 				include: path.resolve(__dirname, '../src'),
@@ -121,14 +121,10 @@ module.exports = {
 		jquery: '$'
 	},
 	plugins: [
-		new happypack(
-			{
-				id: 'js',
-				use: [
-					{loader: 'babel-loader'}
-				]
-			}
-		),
+		new happypack({
+			id: 'js',
+			use: [{ loader: 'babel-loader' }]
+		}),
 		new CleanWebpackPlugin(),
 		new CopyPlugin({
 			patterns: [
@@ -169,7 +165,7 @@ module.exports = {
 			// 将每个模块注入jquery插件
 			$: 'jquery'
 		}), */
-        new VueLoaderPlugin(),
+		new VueLoaderPlugin(),
 		// new webpack.BannerPlugin('webpack打包测试'), // 为每个打包文件添加文件声明
 		new webpack.IgnorePlugin(/\.\local/, /moment/) // 当打包遇到moment, local就忽略，此时需要手动映入local包
 	],
@@ -179,14 +175,29 @@ module.exports = {
 		},
 		extensions: ['*', '.js', '.json', '.vue', '.jsx'] //可以省略文件后缀名
 	},
-	optimization: { // 优化项
-		splitChunks: { // 分割代码块
-			chunks: 'initial', //优化非异步模块的复用性
-			// miniSize: 0,
-			minChunks: 2, //最少使用一次
-			cacheGroups: { //缓存组
+	optimization: {
+		// 优化项
+		// 分割代码块
+		splitChunks: {
+			cacheGroups: {
+				//公用模块抽离
 				common: {
-					
+					chunks: 'initial',
+					minSize: 0, //大于0个字节
+					minChunks: 2 //抽离公共代码时，这个代码块最小被引用的次数
+				},
+				//第三方库抽离
+				/* 
+				注意：这里需要配置权重 priority，因为抽离的时候会执行第一个common配置，
+				入口处看到jquery也被公用了就一起抽离了，不会再执行wendor的配置了，所以加了权重之后会先抽离第三方模块，
+				然后再抽离公共common的，这样就实现了第三方和公用的都被抽离了
+			*/
+				vendor: {
+					priority: 1, //权重
+					test: /node_modules/,
+					chunks: 'initial',
+					minSize: 0, //大于0个字节
+					minChunks: 2 //在分割之前，这个代码块最小应该被引用的次数
 				}
 			}
 		}
