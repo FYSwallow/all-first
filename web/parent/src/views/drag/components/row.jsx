@@ -20,6 +20,8 @@ const RowLayout = ({ children, node, addLayout }) => {
     const [{ isOver, isOverCurrent }, drop] = useDrop({
         accept: "col",
         drop(item, monitor) {
+            const didDrop = monitor.didDrop();
+            if (didDrop) return
             addLayout(node, item)
         },
         collect: (monitor) => ({

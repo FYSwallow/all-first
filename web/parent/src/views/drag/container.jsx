@@ -15,25 +15,16 @@ const styles = {
 function callback(key) {
     console.log(key);
 }
-// let initBoxArr = [
-//     { type: "row", id: '1', pId: null }, //根标签固定存在,无法删除
-//     { type: "row", id: '1-1', pId: '1' },
-//     { type: "row", id: '1-2', pId: '1' },
-//     { type: "row", id: '1-3', pId: '1' },
-//     { type: "row", id: '1-1-1', pId: '1-1' },
-//     { type: "row", id: '1-1-2', pId: '1-1' },
-//     { type: "row", id: '1-1-3', pId: '1-1' },
-//     { type: "row", id: '1-1-4', pId: '1-1' }
-// ]
 
 function DragContainer() {
     let cardArr = [1, 2, 3, 4, 5];
     const [boxes, setBoxes] = useState([]);
     const [, drop] = useDrop({
-        accept: ["row", "col", "box"],
+        accept: 'row',
         drop(item, monitor) {
-            if (item.type === 'row' || boxes.length === 0) {
-                setBoxes([...boxes, { type: item.type, treeId: '1', parent: null }])
+            const didDrop = monitor.didDrop();
+            if (!didDrop) {
+                addLayout(null, item) 
             }
         }
     })
@@ -42,34 +33,20 @@ function DragContainer() {
     }, [boxes])
 
     const addLayout = (pId, item) => {
-        const parentItem = boxes.find(val => val.id === pId)
         const { type } = item
-        if (parentItem.type === 'row') {
-            if (type === 'row' || type === 'box') {
-                return message.info('请添加列布局')
-            }
-            let childrenList = boxes.filter(val => val.pId === pId)
-            setBoxes([...boxes, { type, treeId: pId + '-' + (childrenList.length + 1), pId: pId }])
-        }
-        if (parentItem.type === 'col') {
-            if (type === 'col') {
-                return message.info('你已经添加布局，请选择内容')
-            }
-            let childrenList = boxes.filter(val => val.pId === pId)
-            setBoxes([...boxes, { type, treeId: pId + '-' + (childrenList.length + 1), pId: pId }])
-        }
+        let childrenList = boxes.filter(val => val.pId === pId)
+
+        let prevId = pId ? pId+ '-': ''
+        return setBoxes([...boxes, { type, id: prevId  + (childrenList.length + 1), pId: pId }])
+       
     }
 
     const getBoxList = (data) => {
-        let initArr = []
-        if (data instanceof Object) {
-            initArr.push(data)
-        }
         const getBox = (children) => {
             return children.map(item => {
                 if (item.type === 'row') {
                     return (
-                        <RowLayout key={item.parent} node={item.treeId} addLayout={addLayout}>
+                        <RowLayout key={item.id} node={item.id} addLayout={addLayout}>
                             {
                                 item.children.length > 0
                                     ? getBox(item.children)
@@ -80,7 +57,7 @@ function DragContainer() {
                 }
                 if (item.type === 'col') {
                     return (
-                        <ColLayout key={item.parent} node={item.treeId} addLayout={addLayout}>
+                        <ColLayout key={item.id} node={item.id} addLayout={addLayout}>
                             {
                                 item.children.length > 0
                                     ? getBox(item.children)
@@ -94,7 +71,7 @@ function DragContainer() {
                 }
             })
         }
-        return getBox(initArr)
+        return getBox(data)
     }
     return (
         <div className="drag-container">

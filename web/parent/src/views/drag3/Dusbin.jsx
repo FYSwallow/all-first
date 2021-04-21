@@ -24,10 +24,10 @@ const Dustbin = ({ greedy, children }) => {
         accept: "box",
         drop(item, monitor) {
             const didDrop = monitor.didDrop();
+            console.log(didDrop,greedy, 'drop')
             if (didDrop && !greedy) {
                 return;
             }
-            console.log(didDrop,greedy, 'drop')
             setHasDropped(true);
             setHasDroppedOnChild(didDrop);
         },
@@ -39,6 +39,7 @@ const Dustbin = ({ greedy, children }) => {
 
     const text = greedy ? 'greedy' : 'not greedy'
     let backgroundColor = 'rgba(0, 0, 0, .5)'
+    console.log(isOverCurrent)
     if (isOverCurrent || (isOver && greedy)) {
         backgroundColor = 'darkgreen';
     }
