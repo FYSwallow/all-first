@@ -7,8 +7,8 @@ const style = {
   backgroundColor: "white",
   cursor: "move",
 };
-const Box = ({children, content}) => {
-  const [, drag] = useDrag({ item: { type: "box", content } });
+const Box = ({children, content,type}) => {
+  const [, drag] = useDrag({ item: { type, content } });
   return (
     <div ref={drag} style={style}>
       {children}

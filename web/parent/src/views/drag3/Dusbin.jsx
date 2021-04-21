@@ -35,9 +35,10 @@ const Dustbin = ({ greedy, children }) => {
             isOver: monitor.isOver(),
             isOverCurrent: monitor.isOver({ shallow: true }),
         }),
-    }, [greedy, setHasDropped, setHasDroppedOnChild]);
-    const text = greedy ? 'greedy' : 'not greedy';
-    let backgroundColor = 'rgba(0, 0, 0, .5)';
+    }, [greedy, setHasDropped, setHasDroppedOnChild])
+
+    const text = greedy ? 'greedy' : 'not greedy'
+    let backgroundColor = 'rgba(0, 0, 0, .5)'
     if (isOverCurrent || (isOver && greedy)) {
         backgroundColor = 'darkgreen';
     }
