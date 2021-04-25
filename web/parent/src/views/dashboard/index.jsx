@@ -1,8 +1,10 @@
 import React from 'react'
+import { DatePicker } from 'antd'
+const { RangePicker } = DatePicker;
 
 function DashBoard() {
     return (
-        <div>统计分析</div>
+        <RangePicker />
     );
 }
 

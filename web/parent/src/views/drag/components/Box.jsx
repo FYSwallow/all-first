@@ -6,7 +6,7 @@ const style = {
   padding: "0.5rem 1rem",
   backgroundColor: "white",
   cursor: "move",
-};
+}
 const Box = ({children, content,type}) => {
   const [, drag] = useDrag({ item: { type, content } });
   return (

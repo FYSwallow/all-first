@@ -8,7 +8,8 @@ import {
 
 import Dashboard from '../views/dashboard/index'
 import H5 from '../views/H5/index' // 语义化
-import Drag from '../views/drag/index'
+import Drag from '../views/drag2/index'
+import ReSize from '../views/resize/index'
 import asyncComponent from './../components/aysncComponent'
 
 import UserLayout from '../layout/userLayout'
@@ -195,6 +196,14 @@ export const asyncRoutes = [
         component: Drag,
         meta: {
             title: '拖拽',
+        },
+    },
+    {
+        path: '/resize',
+        icon: DragOutlined,
+        component: ReSize,
+        meta: {
+            title: '拉伸',
         },
     },
     {
