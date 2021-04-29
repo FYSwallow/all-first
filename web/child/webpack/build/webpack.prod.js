@@ -42,6 +42,6 @@ module.exports = merge(base, {
 	            parallel: true,
 	        }),
 	        new OptimizeCssAssetsPlugin({parallel:true}),
-	    ]
+	    ],
 	}
 })
