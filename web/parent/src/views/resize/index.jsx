@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
-
+import './index.css'
 const ReactGridLayout = WidthProvider(RGL);
 
 export default class NoCompactingLayout extends React.PureComponent {

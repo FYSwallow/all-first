@@ -39,7 +39,7 @@ export const roleList = [
         phone: 13288487566,
         createTime: Date.now() - 3600000,
         description: '管理员',
-        permission: ["/dashboard", "/nested", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/h5", "/drag","/resize", "/permission", "/permission/role", "/permission/user", "https://github.com/PanJiaChen/vue-element-admin"]
+        permission: ["/dashboard", "/nested","/table", "/nested/menu1", "/nested/menu2", "/nested/menu1/menu1-1", "/nested/menu1/menu1-2", "/nested/menu1/menu1-1/menu1-1-1", "/nested/menu1/menu1-1/menu1-1-2", "/h5", "/drag","/resize", "/permission", "/permission/role", "/permission/user", "https://github.com/PanJiaChen/vue-element-admin"]
     },
     {
         key: '2',

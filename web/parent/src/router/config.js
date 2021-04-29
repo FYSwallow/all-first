@@ -10,6 +10,7 @@ import Dashboard from '../views/dashboard/index'
 import H5 from '../views/H5/index' // 语义化
 import Drag from '../views/drag2/index'
 import ReSize from '../views/resize/index'
+import Table from '../views/table/index'
 import asyncComponent from './../components/aysncComponent'
 
 import UserLayout from '../layout/userLayout'
@@ -204,6 +205,14 @@ export const asyncRoutes = [
         component: ReSize,
         meta: {
             title: '拉伸',
+        },
+    },
+    {
+        path: '/table',
+        icon: DragOutlined,
+        component: Table,
+        meta: {
+            title: '表格',
         },
     },
     {
