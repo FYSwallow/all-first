@@ -4,6 +4,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin') //
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin') //不支持es6语法，已跟换
 const TerserPlugin = require('terser-webpack-plugin')
 //mode为production情况下js默认为压缩的， 但optimize-css-assets-webpack-plugin压缩css会破坏js原有压缩效果，使用terser-webpack-plugin压缩js
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(base, {
     mode: 'production',
@@ -13,6 +14,22 @@ module.exports = merge(base, {
         aggregateTimeout: 500, // 防抖
         ignored: /node_modules/ // 不监控
     }, */
+    plugins: [
+        new BundleAnalyzerPlugin(
+            {
+               analyzerMode: 'server',
+               analyzerHost: '127.0.0.1',
+               analyzerPort: 8890,
+               reportFilename: 'report.html',
+               defaultSizes: 'parsed',
+               openAnalyzer: true,
+               generateStatsFile: false,
+               statsFilename: 'stats.json',
+               statsOptions: null,
+               logLevel: 'info'
+            }
+        )
+    ],
     optimization: { // 优化项
 	    minimize: true,
 	    minimizer:[

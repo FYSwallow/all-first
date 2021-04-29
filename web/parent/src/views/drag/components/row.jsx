@@ -31,7 +31,7 @@ const RowLayout = ({ children, node, addLayout }) => {
     }, []);
     let backgroundColor = 'rgba(0, 0, 0, .5)';
     if (isOverCurrent || isOver) {
-        backgroundColor = 'darkgreen';
+        backgroundColor = 'red';
     }
     return (
         <Row ref={drop} style={getStyle(backgroundColor)}>

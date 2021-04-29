@@ -7,10 +7,9 @@ import { useDrop } from "react-dnd"
 import { transTree } from './utils'
 const { TabPane } = Tabs;
 const styles = {
-    width: 300,
-    height: 300,
     border: "1px solid black",
     position: "relative",
+    height: 300
 };
 function callback(key) {
     console.log(key);

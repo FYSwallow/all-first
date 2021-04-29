@@ -5,6 +5,9 @@ import {
     Table,
     Space,
 } from 'antd'
+import XLSX from 'xlsx'
+import { exportTableData, exportTable} from '@/utils/export.js'
+
 
 function UserSetting(props) {
     const columns = [
@@ -30,7 +33,8 @@ function UserSetting(props) {
             key: 'permission',
             render: role => (
                 <Space size="middle">
-                    <Link>编辑权限</Link>
+                    编辑权限
+                    {/* <Link>编辑权限</Link> */}
                 </Space>
             ),
         },
@@ -72,11 +76,11 @@ function UserSetting(props) {
         },
     ]
 
-
     return (
         <div className='role-container'>
-            <Button type="primary"><Link to="/permission/role/add">新增</Link></Button>
-            <Table columns={columns} dataSource={data} />
+            {/* <Button type="primary"><Link to="/permission/role/add">新增</Link></Button> */}
+            <Button type="primary" onClick={() => exportTable(exportTableData(data, columns), '人员分析.xlsx')}>导出</Button>
+            <Table columns={columns} dataSource={data} id="data-table"/>
         </div>
     )
 }

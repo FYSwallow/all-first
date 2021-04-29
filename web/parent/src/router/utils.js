@@ -1,5 +1,6 @@
 import { routes, asyncRoutes } from './config'
 import { isExternal } from '../utils/validate'
+
 /**
  * 根据不同场景获取对应的路由列表
  * @param {*} routerList 路由列表
@@ -98,9 +99,9 @@ export const layoutRouteList = getLayoutRoutelist()
 export const systemRouteList = getSystemRoutelist()
 export const businessRouteList = getBusinessRoutelist()
 export const asyncBusinessRoutelist = getAsyncBusinessRoutelist()
-export const businessRouteListTotal = [...getAsyncBusinessRoutelist(), ...getBusinessRoutelist() ]
+export const businessRouteListTotal = [...getAsyncBusinessRoutelist(), ...getBusinessRoutelist()]
 export const testRouteList = getTestRouteList()
-export const businessMenuList = [ ...getAsyncBusinessMenulist(), ...getBusinessMenulist()]
+export const businessMenuList = [...getAsyncBusinessMenulist(), ...getBusinessMenulist()]
 export const treeMenuList = getTreeMenuList(businessMenuList)
 
 export const getPageTitle = (routeList, pathname) => {
@@ -117,10 +118,10 @@ export const flatterMenuList = (list) => {
         if (itemArr.length <= 2) {
             resultItem.push(item)
         } else {
-            let preVal =''
+            let preVal = ''
             itemArr.forEach((val, index) => {
                 if (index === 0) return
-                preVal +=  '/' + val    
+                preVal += '/' + val
                 if (resultItem.includes(preVal)) return
                 resultItem.push(preVal)
             })

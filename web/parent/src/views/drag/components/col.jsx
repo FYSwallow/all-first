@@ -5,8 +5,11 @@ function getStyle(backgroundColor) {
     return {
         minHeight: '8rem',
         backgroundColor,
+        cursor: "move",
+
     };
 }
+
 const ColLayout = ({ children,node, addLayout }) => {
     const [{ isOver, isOverCurrent }, drop] = useDrop({
         accept: ["row", "box"],
@@ -19,7 +22,8 @@ const ColLayout = ({ children,node, addLayout }) => {
             isOver: monitor.isOver(),
             isOverCurrent: monitor.isOver({ shallow: true }),
         }),
-    }, []);
+    }, [])
+    
     let backgroundColor = 'rgba(0, 0, 0, .5)';
     if (isOverCurrent) {
         backgroundColor = 'darkgreen';

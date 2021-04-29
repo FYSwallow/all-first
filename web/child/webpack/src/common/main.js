@@ -1,5 +1,7 @@
+import conmmon from './index'
 export const test = () => {
-    console.log('你好啊')
+    let result = conmmon(10)
+    console.log('你好啊' + result)
 }
 export const asyncFunc = () =>{
     import('./async').then(data => {
