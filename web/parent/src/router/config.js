@@ -9,6 +9,7 @@ import {
 import Dashboard from '../views/dashboard/index'
 import H5 from '../views/H5/index' // 语义化
 import Drag from '../views/drag/index'
+import TemplateEditor from '../views/template/index'
 import asyncComponent from './../components/aysncComponent'
 
 import UserLayout from '../layout/userLayout'
@@ -195,6 +196,14 @@ export const asyncRoutes = [
         component: Drag,
         meta: {
             title: '拖拽',
+        },
+    },
+    {
+        path: '/templateEditor',
+        icon: DragOutlined,
+        component: TemplateEditor,
+        meta: {
+            title: '编辑器',
         },
     },
     {
