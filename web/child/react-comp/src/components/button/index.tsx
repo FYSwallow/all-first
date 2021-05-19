@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 function Button() {
-    return (
-        <button>123</button>
-    )
+    return <button>123</button>;
 }
