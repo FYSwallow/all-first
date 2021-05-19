@@ -4,4 +4,5 @@
 // import './pages/base/4.函数'
 // import './pages/base/5.泛型'
 // import './pages/base/7.内容兼容型'
-import './pages/base/8.高级类型'
+// import './pages/base/8.高级类型'
+import './pages/base/10.声明合并'
