@@ -1,0 +1,52 @@
+{
+  "name": "react-comp",
+  "version": "1.0.0",
+  "description": "react组件",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "webpack --config build/webpack.prod.js",
+    "dev": "webpack server --config build/webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fuyue",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-react": "^7.13.13",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.23.2",
+    "file-loader": "^6.2.0",
+    "happypack": "^5.0.1",
+    "html-webpack-plugin": "^5.3.1",
+    "less": "^4.1.1",
+    "less-loader": "^9.0.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "optimize-css-assets-webpack-plugin": "^6.0.0",
+    "postcss-loader": "^5.3.0",
+    "terser-webpack-plugin": "^5.1.2",
+    "ts-loader": "^8.3.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.1",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
