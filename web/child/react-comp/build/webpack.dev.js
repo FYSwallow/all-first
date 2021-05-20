@@ -9,7 +9,8 @@ module.exports = merge(base, {
 		port: 8080,
 		progress: true, //进度条
         contentBase: '../dist',
-        open: true,
+		open: true,
+		hot: true,
 		// proxy: {
 		// 	'/api': {
 		// 		target: 'http://localhost:3000',

@@ -40,7 +40,7 @@ module.exports = {
             //     exclude: /node_modules/
             // },
             {
-                test: /\.(tsx)$/,
+                test: /\.(ts|tsx)$/,
                 use: ['babel-loader','ts-loader'],
                 include: path.resolve(__dirname, '../src'),
                 exclude: /node_modules/
@@ -71,6 +71,23 @@ module.exports = {
                     },
                     {
                         loader: 'less-loader'
+                    }
+                ],
+                include: path.resolve(__dirname, '../src'),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
                     }
                 ],
                 include: path.resolve(__dirname, '../src'),
@@ -120,7 +137,7 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, '../src')
         },
-        extensions: ['*', '.js', '.json', '.vue', '.tsx'] //可以省略文件后缀名
+        extensions: ['*', '.js', '.json', '.vue', '.tsx', '.ts'] //可以省略文件后缀名
     },
     optimization: {
         // 优化项

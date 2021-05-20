@@ -1,0 +1,81 @@
+@import '../../style/color.scss';
+
+button {
+    border-radius: 0;
+    outline: none;
+    border: none;
+}
+$btnPreCls: 'rc-button';
+$fsBase: 14px;
+$topBase: 6px;
+$leftbase: 16px;
+$whiteColor: #fff;
+
+@mixin btnSize($size, $top, $left) {
+    font-size: $size;
+    padding: $top $left;
+}
+@mixin btnType( $bgColor, $color) {
+    background-color: $bgColor;
+    color: $color;
+    border-color: $bgColor;
+    &:hover, &:active {
+        color: $color;
+        background-color: rgba($bgColor, .9);
+    }
+}
+
+.#{$btnPreCls}{
+    display: inline-block;
+    border: 1px solid transparent;
+    @include btnSize($fsBase, $topBase, $leftbase);
+    @include btnType( #c4c4c4, #1f2d3d);
+    color: #1f2d3d;
+    border-color: #c4c4c4;
+    background-color: #fff;
+    &>span:nth-of-type() {
+        display: inline-block;
+        margin-left: 0 10px;
+    }
+    &:hover {
+        color: $blueBase;
+        border-color: $blueBase;
+        background-color: #fff;
+    }
+    &-primary {
+        @include btnType( $blueBase, $whiteColor);
+    }
+    &-success {
+        @include btnType( $greenBase, $whiteColor);
+    }
+    &-warning {
+        @include btnType( $orangeBase, $whiteColor);
+    }
+    &-danger {
+        @include btnType( $redBase, $whiteColor);
+    }
+    &-text {
+        @include btnType( $whiteColor, $blueBase);
+    }
+    &-large {
+        @include btnSize($fsBase+2px, $topBase, $leftbase);
+    }
+    &-small {
+        @include btnSize($fsBase - 1px, $topBase - 2px, $leftbase - 2px);
+    }
+    &-mini {
+        @include btnSize($fsBase - 2px, $topBase - 4px, $leftbase - 4px);
+    }
+    &-disabled {
+        color: #bfcbd9;
+        border-color: #d1dbe5;
+        background-color: #eef1f6;
+        cursor: not-allowed;
+        &:hover {
+            color: #bfcbd9;
+            border-color: #d1dbe5;
+            background-color: #eef1f6;
+        }
+    }
+
+}
