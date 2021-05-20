@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
-import { routes } from "./router/index";
+import React, { Suspense } from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { routes } from './router/index';
 
 const renderRoutes = (routes) => {
     return routes.map((route) => {
@@ -12,7 +12,7 @@ const renderRoutes = (routes) => {
                 render={(props) => {
                     document.title = route.meta.title;
                     return (
-                        <Suspense fallback={"加载中。。。"}>
+                        <Suspense fallback={'加载中。。。'}>
                             <Component {...props}></Component>
                         </Suspense>
                     );

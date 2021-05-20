@@ -1,11 +1,18 @@
 import React, { lazy } from "react";
 
-const Button = lazy(() => import("../pages/button"));
+const ButtonPage = lazy(() => import("../pages/button"));
 
 export const routes = [
     {
         path: "/button",
-        component: Button,
+        component: ButtonPage,
+        meta: {
+            title: "Button页面",
+        },
+    },
+    {
+        path: "/",
+        component: ButtonPage,
         meta: {
             title: "Button页面",
         },
