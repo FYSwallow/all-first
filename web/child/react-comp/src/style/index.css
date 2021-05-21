@@ -22,3 +22,9 @@ code {
 .page-body .page-list:last-child{
     border-bottom: 1px solid #eeeeee;
 }
+
+button {
+    border-radius: 0;
+    outline: none;
+    border: none;
+}

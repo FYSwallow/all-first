@@ -30,7 +30,7 @@ function ButtonPage() {
                     </div>
                     <div className="page-item">
                         <h5>按钮大小</h5>
-                        <Button icon={<LoadingOutlined />}>图标按钮</Button>
+                        <Button icon={<LoadingOutlined />} type='primary'>图标按钮</Button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,53 @@
+@import '../../../style/color.scss';
+@import './themes.scss';
+@import './mixin.scss';
+
+$btnPreCls: 'rc-button';
+
+.#{$btnPreCls} {
+    @include btn();
+    @include btnSize();
+
+    &>span.btn-icon + span {
+        display: inline-block;
+        margin-left: 8px;
+    }
+
+    &:hover {
+        color: $blueBase;
+        background-color: #fff;
+        border-color: $blueBase;
+    }
+
+    @each $type,
+    $color,
+    $bgColor,
+    $bdColor in ('primary', $whiteColor, $blueBase, $blueBase),
+    ('success', $whiteColor, $greenBase, $greenBase),
+    ('warning', $whiteColor, $orangeBase, $orangeBase),
+    ('danger', $whiteColor, $redBase, $redBase),
+    ('text', $whiteColor, $whiteColor, $whiteColor) {
+        &-#{$type} {
+            @include btnType($color, $bgColor, $bdColor);
+            @include hover($color, $bgColor, $bdColor);
+        }
+    }
+
+    @each $size,
+    $fs,
+    $tbPad,
+    $lrPad in ('large', $fsLarge, $tbPadLarge, $lrPadLarge),
+    ('small', $fsSmall, $tbPadSmall, $lrPadSmall),
+    ('mini', $fsMini, $tbPadMini, $lrPadMini), {
+        &-#{$size} {
+            @include btnSize($fs, $tbPad, $lrPad);
+        }
+    }
+   
+    &-disabled {
+        @include btnType($disabledColor, $disabledBgColor, $disabledBdColor);
+        cursor: not-allowed;
+        @include hover($disabledColor, $disabledBgColor, $disabledBdColor);
+    }
+
+}

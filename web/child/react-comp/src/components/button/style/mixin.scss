@@ -1,0 +1,22 @@
+@mixin btnSize($size: $fsBase, $tbPad: $tbPadBase, $lrPad: $lrPadbase) {
+    font-size: $size;
+    padding: $tbPad $lrPad;
+}
+@mixin btnType($color:$blackColor, $bgColor:$whiteColor, $bdColor: $grayColor) {
+    color: $color;
+    background-color: $bgColor;
+    border-color: $bdColor;
+}
+@mixin hover($color:$blackColor, $bgColor:$whiteColor, $bdColor: $grayColor) {
+    &:hover, &:active {
+        @include btnType($color, rgba($bgColor, .8), rgba($bdColor, .8))
+    }
+}
+
+@mixin btn() {
+    display: inline-block;
+    border: 1px solid transparent;
+    @include btnSize();
+    @include btnType();
+    @include hover;
+}

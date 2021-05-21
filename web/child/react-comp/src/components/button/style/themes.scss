@@ -1,0 +1,24 @@
+
+
+//文字大小
+$fsBase: 14px;
+$fsLarge: $fsBase+1px;
+$fsSmall: $fsBase - 1px;
+$fsMini: $fsBase - 2px;
+
+//上下边距
+$tbPadBase: 6px;
+$tbPadLarge: $tbPadBase + 1px;
+$tbPadSmall: $tbPadBase - 1px;
+$tbPadMini: $tbPadBase - 2px;
+
+// 左右边距
+$lrPadbase: 16px;
+$lrPadLarge: $lrPadbase + 1px;
+$lrPadSmall: $lrPadbase - 1px;
+$lrPadMini: $lrPadbase - 1px;
+
+// 颜色
+$disabledColor:#bfcbd9;
+$disabledBgColor:#eef1f6;
+$disabledBdColor:#d1dbe5;

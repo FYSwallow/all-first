@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, ReactElement, ReactNode } from "react";
 import classnames from "classnames";
-import "./index.scss";
+import "./style/index.scss";
 
 interface ButtonProps {
     onClick?: () => void;
@@ -29,7 +29,7 @@ const Button: FC<ButtonProps> = (props: ButtonProps) => {
             style={style}
             onClick={onClick}
         >
-            {icon || null}
+            {icon ? <span className="btn-icon">{icon}</span> : null}
             <span>{children}</span>
         </button>
     );
